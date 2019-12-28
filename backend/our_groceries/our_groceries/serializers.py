@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from backend.our_groceries.our_groceries.models import Item, List, User, Role
+from our_groceries.models import Item, List, User, Role
 
 
-class ItemOptionSerializer(serializers.ModelSerializer):
+class ItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = Item
         fields = '__all__'
@@ -19,7 +19,7 @@ class ListSerializer(serializers.ModelSerializer):
         return obj.owner.name if obj.owner else ''
 
 
-class UserOptionSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = '__all__'
