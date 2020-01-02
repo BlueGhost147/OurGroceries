@@ -33,14 +33,14 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-
     path('item/list', views.item_list),
     path('item/options', views.item_options),
     path('item/create', views.item_create),
     path('item/<int:item_id>/get', views.item_update),
     path('item/<int:item_id>/update', views.item_update),
     path('item/<int:item_id>/delete', views.item_update),
+
+    path('item/<int:list_id>/list', views.item_by_list),
 
     path('list/list', views.list_list),
     path('list/options', views.list_options),

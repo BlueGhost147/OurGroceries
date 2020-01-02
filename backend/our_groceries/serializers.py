@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from our_groceries.models import Item, List, User, Role
+from our_groceries.models import Item, List, UserProfile, Role
 
 
 class ItemSerializer(serializers.ModelSerializer):
@@ -13,15 +13,16 @@ class ListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = List
-        fields = ['id', 'name', 'owner_name', 'location', 'list_type']
+        fields = '__all__'
+        #fields = ['id', 'name', 'owner_name', 'location', 'list_type']
 
     def get_owner_name(self, obj):
         return obj.owner.name if obj.owner else ''
 
 
-class UserSerializer(serializers.ModelSerializer):
+class UserProfileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = UserProfile
         fields = '__all__'
 
 
@@ -31,7 +32,7 @@ class RoleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Role
-        fields = ['user_name', 'list_name', 'role_type']
+        fields = '__all__'
 
     def get_user_name(self, obj):
         return obj.user.user_name if obj.user else ''

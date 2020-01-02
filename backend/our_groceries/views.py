@@ -30,6 +30,18 @@ def item_create(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET'])
+def item_by_list(request, list_id):
+    try:
+        item = Item.objects.get(list__id=list_id)
+    except Item.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = ItemSerializer(item)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 # GET => Return the item of the given id
 # PUT => Update a item
 # DELETE => Delete the item
