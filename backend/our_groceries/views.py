@@ -33,11 +33,11 @@ def item_create(request):
 @api_view(['GET'])
 def item_by_list(request, list_id):
     try:
-        item = Item.objects.get(list__id=list_id)
+        item = Item.objects.filter(list__id=list_id)
     except Item.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    serializer = ItemSerializer(item)
+    serializer = ItemSerializer(item, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
