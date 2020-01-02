@@ -3,19 +3,19 @@ from our_groceries.models import Item, List, UserProfile, Role
 
 
 class ItemAdmin(admin.ModelAdmin):
-    pass;
+    pass
 
 
 class ListAdmin(admin.ModelAdmin):
-    pass;
+    pass
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    pass;
+    pass
 
 
 class RoleAdmin(admin.ModelAdmin):
-    pass;
+    pass
 
 
 admin.site.register(Item, ItemAdmin)

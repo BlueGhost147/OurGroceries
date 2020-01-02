@@ -40,7 +40,7 @@ urlpatterns = [
     path('item/<int:item_id>/update', views.item_update),
     path('item/<int:item_id>/delete', views.item_update),
 
-    path('item/<int:list_id>/list', views.item_by_list),
+    path('item/list/<int:list_id>/get', views.item_by_list),
 
     path('list/list', views.list_list),
     path('list/options', views.list_options),

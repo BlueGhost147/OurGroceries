@@ -37,9 +37,8 @@ def item_by_list(request, list_id):
     except Item.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
-    if request.method == 'GET':
-        serializer = ItemSerializer(item)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    serializer = ItemSerializer(item)
+    return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 # GET => Return the item of the given id

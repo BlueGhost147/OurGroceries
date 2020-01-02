@@ -14,7 +14,6 @@ class ListSerializer(serializers.ModelSerializer):
     class Meta:
         model = List
         fields = '__all__'
-        #fields = ['id', 'name', 'owner_name', 'location', 'list_type']
 
     def get_owner_name(self, obj):
         return obj.owner.name if obj.owner else ''
