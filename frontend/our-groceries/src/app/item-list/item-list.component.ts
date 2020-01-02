@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {ItemService} from '../services/item.service';
 
 @Component({
   selector: 'app-item-list',
@@ -6,10 +7,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit {
+  items;
 
-  constructor() { }
+  @Input()
+  listId;
 
-  ngOnInit() {
+  constructor(private itemService: ItemService) {
   }
 
+  ngOnInit() {
+    this.itemService.getItemsFromList(this.listId)
+      .subscribe((response: any[]) => {
+        this.items = response;
+      });
+  }
+
+  deleteItem(item) {
+    this.itemService.deleteItem(item)
+      .subscribe(() => this.ngOnInit());
+  }
 }

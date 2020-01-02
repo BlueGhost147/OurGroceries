@@ -1,1 +1,3 @@
-<p>item-list works!</p>
+<div *ngFor="let item of items">
+  <app-single-item [itemName]="item.name"></app-single-item>
+</div>

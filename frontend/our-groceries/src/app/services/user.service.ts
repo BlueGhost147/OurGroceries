@@ -42,7 +42,10 @@ export class UserService {
     const token = localStorage.getItem(this.accessTokenLocalStorageKey);
     const decodedToken = this.jwtHelperService.decodeToken(token);
     const permissions = decodedToken.permissions;
-    if(permissions === undefined) return false;
+    if (permissions === undefined) {
+      return false;
+    }
+
     return permission in permissions;
   }
 

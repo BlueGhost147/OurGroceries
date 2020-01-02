@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
-import {UserService} from "../service/user.service";
-import {BehaviorSubject} from "rxjs/internal/BehaviorSubject";
+import {UserService} from '../services/user.service';
+import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
 
 @Component({
   selector: 'app-login',
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       .subscribe((res: any) => {
         localStorage.setItem('access_token', res.token);
         this.userService.isLoggedIn = new BehaviorSubject<boolean>(true);
-        this.router.navigate(['productlist']).then(x => console.log(x));
+        this.router.navigate(['home']).then(x => console.log(x));
       }, () => {
         alert('wrong username or password');
       });
