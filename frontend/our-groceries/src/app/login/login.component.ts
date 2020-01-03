@@ -4,6 +4,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../services/user.service';
 import {BehaviorSubject} from 'rxjs/internal/BehaviorSubject';
+import {MatSnackBar} from "@angular/material";
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginComponent implements OnInit {
 
   loginFormGroup;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private userService: UserService) {
+  constructor(private fb: FormBuilder, private http: HttpClient, private router: Router, private userService: UserService, private _snackBar: MatSnackBar) {
   }
 
   ngOnInit() {
@@ -34,7 +35,9 @@ export class LoginComponent implements OnInit {
         this.userService.isLoggedIn = new BehaviorSubject<boolean>(true);
         this.router.navigate(['home']).then(x => console.log(x));
       }, () => {
-        alert('wrong username or password');
+        this._snackBar.open('wrong username or password', null, {
+          duration: 2000,
+        });
       });
   }
 
