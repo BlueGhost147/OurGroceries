@@ -1,5 +1,25 @@
 from rest_framework import serializers
 from our_groceries.models import Item, List, UserProfile, Role
+from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
+
+
+# Source: https://stackoverflow.com/questions/49189484/how-to-mention-password-field-in-serializer/53553337
+class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(
+        write_only=True,
+        required=True,
+        help_text='',
+        style={'input_type': 'password', 'placeholder': 'Password'}
+    )
+
+    class Meta:
+        model = User
+        fields = '__all__'
+
+    def create(self, validated_data):
+        validated_data['password'] = make_password(validated_data.get('password'))
+        return super(UserSerializer, self).create(validated_data)
 
 
 class ItemSerializer(serializers.ModelSerializer):

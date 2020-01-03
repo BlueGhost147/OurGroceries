@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if(this.userService.isLoggedIn.getValue() === true)
-      this.router.navigate(['productlist']);
+      this.router.navigate(['home']);
 
     this.loginFormGroup = this.fb.group({
       username: ['', Validators.required],
