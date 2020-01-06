@@ -83,7 +83,7 @@ class Role(models.Model):
                      (1, "Read"),
                      (2, "Approval_req"),
                      (3, "Modify"),
-                     (3, "Co-owner"),
+                     (4, "Co-owner"),
                  )
     role_type = models.IntegerField(choices=role_types)
     user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
