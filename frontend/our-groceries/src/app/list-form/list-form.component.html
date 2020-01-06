@@ -1,1 +1,33 @@
-<p>list-form works!</p>
+<form [formGroup]="listFormGroup" class="list-form">
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Name" formControlName="name">
+    <mat-hint align="end">The name of the list</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Owner" formControlName="owner">
+    <mat-hint align="end">The owner of the list</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput type="text" placeholder="Location" formControlName="location">
+    <mat-hint align="end">The location of the list</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="List Type" formControlName="list_type">
+      <mat-option [value]="list_type.key" *ngFor="let list_type of listService.listTypes | keyvalue">{{list_type.value}}
+      </mat-option>
+    </mat-select>
+    <mat-hint align="end">The type of the list</mat-hint>
+  </mat-form-field>
+
+  <br/>
+  <mat-card-actions align="center">
+    <button mat-raised-button color="primary" [disabled]="!listFormGroup.valid" (click)="createList()">
+      <span *ngIf="!listFormGroup.controls.id.value">Create</span>
+      <span *ngIf="listFormGroup.controls.id.value">Update</span>
+    </button>
+  </mat-card-actions>
+</form>

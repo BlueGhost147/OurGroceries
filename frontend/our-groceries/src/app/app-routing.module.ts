@@ -5,6 +5,7 @@ import {HomeOverviewComponent} from './home-overview/home-overview.component';
 import {AuthGuard} from './auth.guard';
 import {LockScreenComponent} from "./lock-screen/lock-screen.component";
 import {ListOptionsResolver} from "./resolver/list-options-resolver";
+import {ListFormComponent} from "./list-form/list-form.component";
 
 
 const routes: Routes = [
@@ -19,6 +20,7 @@ const routes: Routes = [
     }
   },
   {path: 'login', component: LockScreenComponent},
+  {path: 'list-form', component: ListFormComponent},
 ];
 
 @NgModule({

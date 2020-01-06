@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 
 @Injectable({
@@ -6,15 +6,21 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ListService {
 
-  constructor(private http: HttpClient) { }
+  listTypes = {
+    1: 'Cooled',
+    2: 'Shopping'
+  };
 
-  getListById(id)
-  {
+  constructor(private http: HttpClient) {
+  }
+
+  getListById(id) {
     return this.http.get('/api/list/' + id + '/get');
   }
 
-  getListsByUserId(id)
-  {
+  getListsByUserId(id) {
     return this.http.get('/api/list/list');
   }
+
+
 }

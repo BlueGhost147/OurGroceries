@@ -40,7 +40,7 @@ class List(models.Model):
                  )
 
     name = models.TextField(max_length=100)
-    owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
     location = models.TextField(max_length=100, null=True)
     list_type = models.IntegerField(choices=list_types)
     objects = ListManager()
