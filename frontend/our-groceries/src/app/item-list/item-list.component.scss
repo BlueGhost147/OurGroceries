@@ -1,14 +1,20 @@
 .item-list
 {
-  width: 90% !important;
+  width: 100%;
 }
 
 .list-select
 {
-  width: 100% !important;
+  width: 100%;
+
 }
 
 .list-select-option
 {
+  z-index: 99;
+}
 
+.item-list-card, .mat-card
+{
+  background-color: #FFFFFFCC !important;
 }

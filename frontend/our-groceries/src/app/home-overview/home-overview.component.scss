@@ -1,8 +1,8 @@
 .app-item-list
 {
-  width: 95%;
+  width: 100%;
   float: top;
-  margin: 15px;
+
 }
 
 .home-bg {
@@ -20,7 +20,21 @@
   margin: 20px;
 }
 
-:host >>> .mat-figure
+.home-grid
 {
-  align-items: start !important;
+  width: 100%;
+  display: grid;
+  grid-template-columns: auto auto;
 }
+
+.home-grid-col
+{
+  display: grid;
+  margin: 2% 2% 2% 2%;
+}
+
+.logout-row
+{
+}
+
+

@@ -27,19 +27,20 @@ export class ItemListComponent implements OnInit {
       .subscribe(() => this.ngOnInit());
   }
 
-  updateListSelection(newListId)
-  {
+  updateListSelection(newListId) {
     this.listId = newListId;
     this.updateItems();
   }
 
-  updateItems()
-  {
+  updateItems() {
+    if (this.listId !== undefined) {
+
     this.itemService.getItemsFromList(this.listId)
       .subscribe((response: any[]) => {
         this.items = response;
       });
   }
+}
 
 
 }

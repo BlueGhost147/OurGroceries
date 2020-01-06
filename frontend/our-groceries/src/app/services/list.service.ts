@@ -19,6 +19,7 @@ export class ListService {
   }
 
   getListsByUserId(id) {
+  if(id !== undefined)
     return this.http.get('/api/list/list');
   }
 

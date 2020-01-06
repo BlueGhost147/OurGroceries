@@ -10,7 +10,7 @@ export class ItemService {
   }
 
   getItemsFromList(listId) {
-    return this.http.get('/api/item/list/' + listId + '/get');
+      return this.http.get('/api/item/list/' + listId + '/get');
   }
 
   createItem(item) {
