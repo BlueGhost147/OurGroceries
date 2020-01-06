@@ -12,6 +12,6 @@
 
   <!-- Item List -->
   <div *ngFor="let item of items" class="item-list">
-    <app-single-item [itemName]="item.name"></app-single-item>
+    <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id"></app-single-item>
   </div>
 </mat-card>

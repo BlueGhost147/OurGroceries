@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {ItemService} from "../services/item.service";
 
 @Component({
   selector: 'app-single-item',
@@ -25,7 +26,7 @@ export class SingleItemComponent implements OnInit {
      Popup when Edit List
    */
 
-  constructor() { }
+  constructor(private itemService: ItemService) { }
 
   handleClick() {
 
@@ -37,7 +38,8 @@ export class SingleItemComponent implements OnInit {
   }
 
   deleteItem() {
-
+    this.itemService.deleteItemById(this.itemId);
+    this.ngOnInit();
   }
 
   editItem() {
@@ -45,6 +47,7 @@ export class SingleItemComponent implements OnInit {
   }
 
   ngOnInit() {
+
   }
 
 }

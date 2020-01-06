@@ -24,6 +24,10 @@ export class ItemService {
   deleteItem(item) {
     return this.http.delete('/api/item/' + item.id + '/delete');
   }
+
+  deleteItemById(id) {
+    return this.http.delete('/api/item/' + id + '/delete').subscribe(result => console.log("deleted"));
+  }
 }
 
 
