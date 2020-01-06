@@ -1,1 +1,23 @@
-<p>{{itemName}}</p>
+<mat-expansion-panel (click)="handleClick()" [disabled]="isComponentDisabled">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+    {{ itemCount }}x {{itemName}}
+    </mat-panel-title>
+    <mat-panel-description>
+      <mat-checkbox [checked]=itemChecked>In Cart</mat-checkbox>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <p>Priority: {{itemPriority}}</p>
+  <mat-action-row>
+    <button mat-button (click)="editItem()">
+      <mat-icon>settings_applications</mat-icon>
+      Edit
+    </button>
+    <button mat-button (click)="deleteItem()">
+      <mat-icon>delete</mat-icon>
+      Delete
+    </button>
+  </mat-action-row>
+
+</mat-expansion-panel>

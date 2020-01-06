@@ -31,6 +31,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { LockScreenComponent } from './lock-screen/lock-screen.component';
 import {MatIconModule, MatTabsModule} from "@angular/material";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -81,6 +82,8 @@ export function tokenGetter() {
     MatSnackBarModule,
     MatDialogModule,
     FormsModule,
+    MatExpansionModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
