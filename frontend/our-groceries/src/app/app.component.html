@@ -6,7 +6,4 @@
   <app-logout *ngIf="userService.isLoggedIn.getValue() === true"></app-logout>
 </mat-toolbar>
 -->
-<mat-toolbar align="right" *ngIf="userService.isLoggedIn.getValue() === true">
-  <app-logout></app-logout>
-</mat-toolbar>
 <router-outlet></router-outlet>

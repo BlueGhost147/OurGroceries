@@ -23,6 +23,11 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ItemSerializer(serializers.ModelSerializer):
+    storageType = serializers.SerializerMethodField()
+
+    def get_storageType(self, obj):
+        return obj.list.list_type
+
     class Meta:
         model = Item
         fields = '__all__'

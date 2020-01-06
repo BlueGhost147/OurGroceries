@@ -1,2 +1,15 @@
+<div class="home-bg">
 
-<app-item-list [listId]="1"></app-item-list>
+  <mat-toolbar align="right">
+    <app-logout></app-logout>
+  </mat-toolbar>
+
+<mat-grid-list cols="2" row="1">
+  <mat-grid-tile>
+    <app-item-list class="app-item-list" [listId]="listId1" [listOptions]="listOptions"></app-item-list>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <app-item-list [listId]="listId2" [listOptions]="listOptions"></app-item-list>
+  </mat-grid-tile>
+</mat-grid-list>
+</div>

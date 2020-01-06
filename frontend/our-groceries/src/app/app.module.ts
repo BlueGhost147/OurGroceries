@@ -30,7 +30,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { LockScreenComponent } from './lock-screen/lock-screen.component';
-import {MatTabsModule} from "@angular/material";
+import {MatIconModule, MatTabsModule} from "@angular/material";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -69,6 +69,7 @@ export function tokenGetter() {
     MatDatepickerModule,
     MatNativeDateModule,
     MatTabsModule,
+    MatIconModule,
     JwtModule.forRoot(
       {
         config: {

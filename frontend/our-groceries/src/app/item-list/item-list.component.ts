@@ -12,18 +12,34 @@ export class ItemListComponent implements OnInit {
   @Input()
   listId;
 
+  @Input()
+  listOptions;
+
   constructor(private itemService: ItemService) {
   }
 
   ngOnInit() {
-    this.itemService.getItemsFromList(this.listId)
-      .subscribe((response: any[]) => {
-        this.items = response;
-      });
+    this.updateItems();
   }
 
   deleteItem(item) {
     this.itemService.deleteItem(item)
       .subscribe(() => this.ngOnInit());
   }
+
+  updateListSelection(newListId)
+  {
+    this.listId = newListId;
+    this.updateItems();
+  }
+
+  updateItems()
+  {
+    this.itemService.getItemsFromList(this.listId)
+      .subscribe((response: any[]) => {
+        this.items = response;
+      });
+  }
+
+
 }

@@ -1,3 +1,17 @@
-<div *ngFor="let item of items">
-  <app-single-item [itemName]="item.name"></app-single-item>
-</div>
+<mat-card class="item-list">
+
+  <!-- List select -->
+  <mat-form-field>
+    <mat-label>Select a list</mat-label>
+    <mat-select [(value)]="listId" (selectionChange)="updateListSelection($event.value)">
+      <mat-option *ngFor="let list of listOptions" [value]="list.id">
+        {{list.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Item List -->
+  <div *ngFor="let item of items">
+    <app-single-item [itemName]="item.name"></app-single-item>
+  </div>
+</mat-card>
