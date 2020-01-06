@@ -1,6 +1,8 @@
 .app-item-list
 {
-  width: 100%;
+  width: 95%;
+  float: top;
+  margin: 15px;
 }
 
 .home-bg {
@@ -12,7 +14,13 @@
   background-position: center;
 }
 
-.mat-toolbar
+.logout-comp
 {
-  background-color: #FFFFFF00;
+  float: right;
+  margin: 20px;
+}
+
+:host >>> .mat-figure
+{
+  align-items: start !important;
 }

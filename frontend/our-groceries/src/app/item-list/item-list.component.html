@@ -1,17 +1,17 @@
-<mat-card class="item-list">
+<mat-card class="item-list-card">
 
   <!-- List select -->
-  <mat-form-field>
-    <mat-label>Select a list</mat-label>
-    <mat-select [(value)]="listId" (selectionChange)="updateListSelection($event.value)">
-      <mat-option *ngFor="let list of listOptions" [value]="list.id">
+  <mat-form-field class="list-select">
+    <mat-label class="list-select">Select a list</mat-label>
+    <mat-select [(value)]="listId" (selectionChange)="updateListSelection($event.value)" class="list-select">
+      <mat-option *ngFor="let list of listOptions" [value]="list.id" class="list-select-option">
         {{list.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
   <!-- Item List -->
-  <div *ngFor="let item of items">
+  <div *ngFor="let item of items" class="item-list">
     <app-single-item [itemName]="item.name"></app-single-item>
   </div>
 </mat-card>
