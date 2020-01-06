@@ -15,6 +15,7 @@ https://stackoverflow.com/questions/50333003/could-not-find-module-angular-devki
 npm install --save-dev @angular-devkit/build-angular
 npm install @auth0/angular-jwt
 ng add @angular/material
+npm install ngx-long-press --save
 ````
 optional: Fix security vulnerabilities
 ````bash

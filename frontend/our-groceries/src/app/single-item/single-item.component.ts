@@ -20,7 +20,6 @@ export class SingleItemComponent implements OnInit {
   @Input()
   listType;
 
-  isComponentDisabled = false;
 
   /* Extendable List -> shows Prio bzw. Expiration Date
      Popup when Edit List
@@ -29,8 +28,12 @@ export class SingleItemComponent implements OnInit {
   constructor() { }
 
   handleClick() {
-    this.itemChecked = !this.itemChecked;
-    this.isComponentDisabled = !this.isComponentDisabled;
+
+  }
+
+
+  handleLongClick() {
+
   }
 
   deleteItem() {

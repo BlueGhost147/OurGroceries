@@ -1,10 +1,14 @@
-<mat-expansion-panel (click)="handleClick()" [disabled]="isComponentDisabled">
+<mat-expansion-panel (click)="handleClick()">
   <mat-expansion-panel-header>
     <mat-panel-title>
-    {{ itemCount }}x {{itemName}}
+    {{ itemCount == null ? 1 : itemCount }}x {{itemName}}
     </mat-panel-title>
     <mat-panel-description>
-      <mat-checkbox [checked]=itemChecked>In Cart</mat-checkbox>
+      <mat-checkbox
+                    (click)="$event.stopPropagation()"
+                    (keydown)="$event.stopPropagation()" >
+        In Cart
+      </mat-checkbox>
     </mat-panel-description>
   </mat-expansion-panel-header>
 
