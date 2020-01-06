@@ -1,6 +1,26 @@
+.background {
+  background-image: url('../../assets/home-background.jpg') !important;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+  background-size: cover;
+  background-position: center;
+}
+
 .list-form {
   display: flex;
   flex-direction: column;
-  width: 20rem;
-  margin: 3rem auto;
+  width: 25rem;
+  margin: 15px auto;
+  background-color: white;
 }
+
+.block{
+  display: flex;
+  flex-direction: column;
+  width: 35rem;
+  margin: 15px auto;
+  background-color: white;
+}
+
+

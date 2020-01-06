@@ -1,18 +1,19 @@
+<div class = "background">
+  <div class ="block">
 <form [formGroup]="listFormGroup" class="list-form">
-
   <mat-form-field>
     <input matInput type="text" placeholder="Name" formControlName="name">
-    <mat-hint align="end">The name of the list</mat-hint>
+    <mat-hint align="end">name of the list</mat-hint>
   </mat-form-field>
 
   <mat-form-field>
     <input matInput type="text" placeholder="Owner" formControlName="owner">
-    <mat-hint align="end">The owner of the list</mat-hint>
+    <mat-hint align="end">owner of the list</mat-hint>
   </mat-form-field>
 
   <mat-form-field>
     <input matInput type="text" placeholder="Location" formControlName="location">
-    <mat-hint align="end">The location of the list</mat-hint>
+    <mat-hint align="end">location of the list</mat-hint>
   </mat-form-field>
 
   <mat-form-field>
@@ -20,7 +21,7 @@
       <mat-option [value]="list_type.key" *ngFor="let list_type of listService.listTypes | keyvalue">{{list_type.value}}
       </mat-option>
     </mat-select>
-    <mat-hint align="end">The type of the list</mat-hint>
+    <mat-hint align="end">type of the list</mat-hint>
   </mat-form-field>
 
   <br/>
@@ -31,3 +32,5 @@
     </button>
   </mat-card-actions>
 </form>
+</div>
+</div>

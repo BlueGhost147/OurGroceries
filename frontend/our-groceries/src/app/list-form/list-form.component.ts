@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ListService} from "../services/list.service";
 
 @Component({
@@ -14,7 +14,8 @@ export class ListFormComponent implements OnInit {
   listFormGroup;
   ownerOptions;
 
-  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, public listService: ListService) { }
+  constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, public listService: ListService,
+              private router: Router) { }
 
   ngOnInit() {
 
@@ -36,12 +37,12 @@ export class ListFormComponent implements OnInit {
     if (list.id) {
       this.http.put('/api/list/' + list.id + '/update', list)
         .subscribe(() => {
-          alert('updated successfully');
+          this.router.navigate(['/home']);
         });
     } else {
       this.http.post('/api/list/create', list)
         .subscribe((response: any) => {
-          alert('created successfully');
+          this.router.navigate(['/home']);
         });
     }
   }
