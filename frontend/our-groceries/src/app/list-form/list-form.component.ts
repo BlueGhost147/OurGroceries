@@ -47,4 +47,9 @@ export class ListFormComponent implements OnInit {
     }
   }
 
+  backToListView()
+  {
+    this.router.navigate(['/home']);
+  }
+
 }

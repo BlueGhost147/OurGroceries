@@ -33,8 +33,10 @@ $mediaPhoneWidth: 480px;
   align-content: start;
 }
 
-.logout-row
+.newList-button
 {
+  background-color: #FFFFFFCC;
+  padding: 5px 15px 5px 15px;
 }
 
 @media (max-width: $mediaPhoneWidth) {
