@@ -1,3 +1,7 @@
+$mediaScreenWidth: 1260px;
+$mediaTabletWidth: 960px;
+$mediaPhoneWidth: 480px;
+
 .home-bg {
   background-image: url('../../assets/home-background.jpg') !important;
   width: 100%;
@@ -33,4 +37,18 @@
 {
 }
 
+@media (max-width: $mediaPhoneWidth) {
+  .home-grid-col
+  {
+    display: inline-block;
+    width: 94%;
+    padding: 3% 3% 3% 3%;
+    vertical-align:top;
+    align-content: start;
+  }
 
+  .mobile-hidden
+  {
+    display: none !important;
+  }
+}

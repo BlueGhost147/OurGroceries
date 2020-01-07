@@ -20,4 +20,9 @@ export class HomeOverviewComponent implements OnInit {
     this.listOptions = data.listOptions;
   }
 
+  onListSwipe(event)
+  {
+    alert("swipe");
+  }
+
 }

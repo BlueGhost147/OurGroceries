@@ -3,8 +3,8 @@
   <div class="logout-row">
   <app-logout class="logout-comp"></app-logout>
   </div>
-  <div class="home-grid">
+  <div class="home-grid" (swipe)="onListSwipe($event)">
       <app-item-list class="home-grid-col" [listId]="listId1" [listOptions]="listOptions"></app-item-list>
-      <app-item-list class="home-grid-col" [listId]="listId2" [listOptions]="listOptions"></app-item-list>
+      <app-item-list class="home-grid-col mobile-hidden" [listId]="listId2" [listOptions]="listOptions"></app-item-list>
   </div>
 </div>
