@@ -22,7 +22,7 @@ class UserProfile(models.Model):
     # django user account
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_admin = models.BooleanField(default=False)
-    year_of_birth = models.IntegerField(null=True)
+    year_of_birth = models.IntegerField(blank=True, null=True)
     objects = UserProfileManager()
 
     class Meta:
@@ -41,7 +41,7 @@ class List(models.Model):
 
     name = models.TextField(max_length=100)
     owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
-    location = models.TextField(max_length=100, null=True)
+    location = models.TextField(max_length=100, blank=True)
     list_type = models.IntegerField(choices=list_types)
     objects = ListManager()
 
@@ -62,12 +62,12 @@ class Item(models.Model):
 
     # General Item
     name = models.TextField(max_length=100)
-    checked = models.BooleanField()
+    checked = models.BooleanField(default=False)
     priority = models.IntegerField(choices=priority_types, default=2)
     amount = models.PositiveIntegerField(null=True)
     accepted = models.BooleanField(default=True)
     list = models.ForeignKey(List, on_delete=models.CASCADE)
-    expires = models.DateField(null=True)
+    expires = models.DateField(blank=True, null=True)
     objects = ItemManager()
 
     class Meta:
