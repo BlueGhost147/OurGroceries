@@ -12,17 +12,18 @@
   flex-direction: column;
   width: 25rem;
   margin: 15px auto;
-  background-color: white;
+  background-color: #FFFFFFCC;
+  padding: 15px 20px 15px 20px;
+  border-radius: 5px;
 }
 
-.block{
-  display: flex;
-  flex-direction: column;
-  width: 35rem;
-  margin: 15px auto;
-  background-color: white;
+.home-grid
+{
+  width: 100vw;
+  display: inline-block;
+  vertical-align:top;
+  align-content: start;
 }
-
 
 .backToListView-button
 {

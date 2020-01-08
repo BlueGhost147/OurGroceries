@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ItemService} from '../services/item.service';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-item-list',
@@ -15,7 +16,7 @@ export class ItemListComponent implements OnInit {
   @Input()
   listOptions;
 
-  constructor(private itemService: ItemService) {
+  constructor(private itemService: ItemService, private router: Router) {
   }
 
   ngOnInit() {
@@ -35,12 +36,20 @@ export class ItemListComponent implements OnInit {
   updateItems() {
     if (this.listId !== undefined) {
 
-    this.itemService.getItemsFromList(this.listId)
-      .subscribe((response: any[]) => {
-        this.items = response;
-      });
+      this.itemService.getItemsFromList(this.listId)
+        .subscribe((response: any[]) => {
+          this.items = response;
+        });
+    }
   }
-}
+
+  newItem() {
+
+  }
+
+  editList() {
+    this.router.navigate(['/list-form/' + this.listId]);
+  }
 
 
 }

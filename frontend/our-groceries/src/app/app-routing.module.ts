@@ -20,7 +20,8 @@ const routes: Routes = [
     }
   },
   {path: 'login', component: LockScreenComponent},
-  {path: 'list-form', component: ListFormComponent},
+  {path: 'list-form', component: ListFormComponent, canActivate: [AuthGuard]},
+  {path: 'list-form/:id', component: ListFormComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({
