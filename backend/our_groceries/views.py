@@ -8,6 +8,7 @@ from our_groceries.models import Item, List, Role
 from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS, AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.db.models import Q
 
 
 @api_view(['POST'])
@@ -84,7 +85,7 @@ def list_list(request):
     if request.user.is_superuser:
         lists = List.objects.all()
     else:
-        lists = List.objects.filter(owner=request.user.id)
+        lists = List.objects.filter(Q(owner=request.user.id) | Q(roles__user=request.user.id))
     serializer = ListSerializer(lists, many=True)
     return Response(serializer.data)
 
@@ -141,7 +142,7 @@ def role_list(request):
 @api_view(['GET'])
 def role_options(request):
     roles = Role.objects.all()
-    serializer = RoleOptionsSerializer(roles, many=True)
+    serializer = RoleSerializer(roles, many=True)
     return Response(serializer.data)
 
 
