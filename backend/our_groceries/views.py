@@ -81,21 +81,25 @@ def item_update(request, item_id):
 
 @api_view(['GET'])
 def list_list(request):
-    lists = List.objects.all()
+    if request.user.is_superuser:
+        lists = List.objects.all()
+    else:
+        lists = List.objects.filter(owner=request.user.id)
     serializer = ListSerializer(lists, many=True)
     return Response(serializer.data)
 
 
-@api_view(['GET'])
-def list_options(request):
-    lists = List.objects.all()
-    serializer = ListSerializer(lists, many=True)
-    return Response(serializer.data)
+# @api_view(['GET'])
+# def list_options(request):
+#   lists = List.objects.all()
+#  serializer = ListSerializer(lists, many=True)
+# return Response(serializer.data)
 
 
 @api_view(['POST'])
 def list_create(request):
     serializer = ListSerializer(data=request.data)
+    serializer.initial_data['owner'] = request.user.id
     if serializer.is_valid():
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -43,7 +43,7 @@ urlpatterns = [
     path('item/list/<int:list_id>/get', views.item_by_list),
 
     path('list/list', views.list_list),
-    path('list/options', views.list_options),
+    path('list/options', views.list_list),
     path('list/create', views.list_create),
     path('list/<int:list_id>/get', views.list_update),
     path('list/<int:list_id>/update', views.list_update),
