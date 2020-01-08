@@ -40,7 +40,7 @@ class List(models.Model):
                  )
 
     name = models.TextField(max_length=100)
-    owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     location = models.TextField(max_length=100, blank=True)
     list_type = models.IntegerField(choices=list_types)
     objects = ListManager()
@@ -86,7 +86,7 @@ class Role(models.Model):
                      (4, "Co-owner"),
                  )
     role_type = models.IntegerField(choices=role_types)
-    user_profile = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     list = models.ForeignKey(List, on_delete=models.CASCADE)
     objects = RoleManager()
 
