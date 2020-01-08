@@ -12,7 +12,7 @@
 
   <!-- Item List -->
   <div *ngFor="let item of items" class="item-list">
-    <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id" [itemPriority]="item.priority" [isLeft]="false"></app-single-item>
+    <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id" [itemPriority]="item.priority" [isLeft]="false" [listId]="this.listId"></app-single-item>
   </div>
 
   <div *ngIf="listId!==undefined">

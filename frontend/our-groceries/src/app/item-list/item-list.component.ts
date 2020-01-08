@@ -56,6 +56,15 @@ export class ItemListComponent implements OnInit {
   openItemDialog() {
     const dialogRef = this.dialog.open(ItemDialogComponent, {
       width: '250px',
+      data: {
+        itemName: '',
+        itemCount: 1,
+        itemPriority: undefined,
+        itemChecked: false,
+        listType: undefined,
+        itemId: undefined,
+        itemList: this.listId
+      }
     });
 
     dialogRef.afterClosed().subscribe(result => {

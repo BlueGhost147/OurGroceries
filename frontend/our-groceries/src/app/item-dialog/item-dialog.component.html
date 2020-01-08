@@ -2,15 +2,15 @@
 <div mat-dialog-content>
 
   <mat-form-field>
-    <input matInput type="text" placeholder="Name" [(ngModel)]="this.data.item.name">
+    <input matInput type="text" placeholder="Name" [(ngModel)]="this.data.itemName">
     <mat-hint align="end">Name of the item</mat-hint>
   </mat-form-field>
   <mat-form-field>
-    <input matInput type="number" placeholder="Amount" [(ngModel)]="this.data.item.amount">
+    <input matInput type="number" placeholder="Amount" [(ngModel)]="this.data.itemCount">
     <mat-hint align="end">Amount of the item</mat-hint>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="saveItem()" [mat-dialog-close]="data.item.id" cdkFocusInitial>Save</button>
+  <button mat-button (click)="saveItem()" [mat-dialog-close]="data.itemId" cdkFocusInitial>Save</button>
 </div>

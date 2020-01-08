@@ -24,6 +24,8 @@ export class SingleItemComponent implements OnInit {
   listType;
   @Input()
   isLeft = true;
+  @Input()
+  listId;
 
 
   /* Extendable List -> shows Prio bzw. Expiration Date
@@ -69,7 +71,8 @@ export class SingleItemComponent implements OnInit {
         itemPriority: this.itemPriority,
         itemChecked: this.itemChecked,
         listType: this.listType,
-        itemId: this.itemId
+        itemId: this.itemId,
+        itemList: this.listId
       }
     });
 

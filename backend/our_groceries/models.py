@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 
 
 class UserProfileManager(models.Manager):
@@ -67,7 +68,7 @@ class Item(models.Model):
     amount = models.PositiveIntegerField(null=True)
     accepted = models.BooleanField(default=True)
     list = models.ForeignKey(List, on_delete=models.CASCADE)
-    expires = models.DateField(blank=True, null=True)
+    expires = models.DateField(blank=True, default=now, null=True)
     objects = ItemManager()
 
     class Meta:

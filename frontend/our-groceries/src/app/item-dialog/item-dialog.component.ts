@@ -9,6 +9,8 @@ export interface DialogData {
   itemChecked;
   listType;
   itemId;
+  itemExpires;
+  itemList;
 }
 
 @Component({
@@ -30,10 +32,25 @@ export class ItemDialogComponent implements OnInit {
 
   saveItem() {
     if (this.data.itemId === undefined) {
-      this.itemService.createItem({})
+      this.itemService.createItem({
+        name: this.data.itemName,
+        amount: this.data.itemCount,
+        priority: this.data.itemPriority,
+        checked: this.data.itemChecked,
+        // expires: this.data.itemExpires,
+        list: this.data.itemList
+      })
         .subscribe(() => console.log('Created item'));
     } else {
-      this.itemService.updateItem({id: this.data.itemId, name: this.data.itemName, amount: this.data.itemCount})
+      this.itemService.updateItem({
+        id: this.data.itemId,
+        name: this.data.itemName,
+        amount: this.data.itemCount,
+        priority: this.data.itemPriority,
+        checked: this.data.itemChecked,
+        list: this.data.itemList,
+        // expires: this.data.itemExpires,
+      })
         .subscribe(() => console.log('Updated item'));
     }
   }
