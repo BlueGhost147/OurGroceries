@@ -32,6 +32,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { LockScreenComponent } from './lock-screen/lock-screen.component';
 import {MatIconModule, MatTabsModule} from "@angular/material";
 import {MatExpansionModule} from "@angular/material/expansion";
+import { ItemDialogComponent } from './item-dialog/item-dialog.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -49,6 +50,7 @@ export function tokenGetter() {
     HomeOverviewComponent,
     ListFormComponent,
     LockScreenComponent,
+    ItemDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -86,6 +88,7 @@ export function tokenGetter() {
     MatIconModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [SingleItemComponent, ItemListComponent, ItemDialogComponent],
 })
 export class AppModule { }

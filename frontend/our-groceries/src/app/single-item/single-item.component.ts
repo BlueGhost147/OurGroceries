@@ -1,5 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {ItemService} from "../services/item.service";
+import {ItemService} from '../services/item.service';
+import {ItemDialogComponent} from '../item-dialog/item-dialog.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-single-item',
@@ -28,7 +30,8 @@ export class SingleItemComponent implements OnInit {
      Popup when Edit List
    */
 
-  constructor(private itemService: ItemService) { }
+  constructor(private itemService: ItemService, public dialog: MatDialog) {
+  }
 
   handleClick() {
 
@@ -49,11 +52,31 @@ export class SingleItemComponent implements OnInit {
   }
 
   editItem() {
-
+    this.openItemDialog();
   }
 
   ngOnInit() {
 
   }
+
+
+  openItemDialog() {
+    const dialogRef = this.dialog.open(ItemDialogComponent, {
+      width: '250px',
+      data: {
+        itemName: this.itemName,
+        itemCount: this.itemCount,
+        itemPriority: this.itemPriority,
+        itemChecked: this.itemChecked,
+        listType: this.listType,
+        itemId: this.itemId
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+
 
 }

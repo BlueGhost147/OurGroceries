@@ -1,6 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ItemService} from '../services/item.service';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
+import {MatDialog} from '@angular/material/dialog';
+import {ItemDialogComponent} from "../item-dialog/item-dialog.component";
 
 @Component({
   selector: 'app-item-list',
@@ -16,7 +18,7 @@ export class ItemListComponent implements OnInit {
   @Input()
   listOptions;
 
-  constructor(private itemService: ItemService, private router: Router) {
+  constructor(private itemService: ItemService, private router: Router, public dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -44,12 +46,24 @@ export class ItemListComponent implements OnInit {
   }
 
   newItem() {
-
+    this.openItemDialog();
   }
 
   editList() {
     this.router.navigate(['/list-form/' + this.listId]);
   }
+
+  openItemDialog() {
+    const dialogRef = this.dialog.open(ItemDialogComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.ngOnInit();
+    });
+  }
+
+
 
 
 }
