@@ -12,15 +12,11 @@ import {ListService} from "../services/list.service";
 export class ListFormComponent implements OnInit {
 
   listFormGroup;
-  ownerOptions;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, public listService: ListService,
               private router: Router) { }
 
   ngOnInit() {
-
-    const data = this.route.snapshot.data;
-    this.ownerOptions = data.ownerOptions;
 
     this.listFormGroup = this.fb.group({
       id: [null],
@@ -29,6 +25,14 @@ export class ListFormComponent implements OnInit {
       location: [''],
       list_type: [null, Validators.required],
     });
+
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.http.get('/api/list/' + id + '/get')
+        .subscribe((response) => {
+          this.listFormGroup.patchValue(response);
+        });
+    }
 
   }
 
@@ -47,9 +51,11 @@ export class ListFormComponent implements OnInit {
     }
   }
 
-  backToListView()
-  {
+  backToListView() {
     this.router.navigate(['/home']);
   }
 
+  toInt(key: string) {
+    return parseInt(key, 10);
+  }
 }
