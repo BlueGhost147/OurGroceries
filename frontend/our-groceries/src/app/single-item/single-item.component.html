@@ -12,7 +12,7 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
 
-  <p>Priority: {{itemPriority}}</p>
+  <p>Priority: {{itemService.getPriorityFriendlyName(itemPriority)}}</p>
   <mat-action-row>
     <button mat-button (click)="editItem()">
       <mat-icon>settings_applications</mat-icon>

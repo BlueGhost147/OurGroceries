@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 export class ItemService {
 
   constructor(private http: HttpClient) {
+
   }
 
   getItemsFromList(listId) {
@@ -27,6 +28,14 @@ export class ItemService {
 
   deleteItemById(id) {
     return this.http.delete('/api/item/' + id + '/delete').subscribe(result => console.log("deleted"));
+  }
+
+  getPriorityFriendlyName(number) {
+    switch (number) {
+      case 1: return "Low";
+      case 2: return "Medium";
+      case 3: return "High";
+    }
   }
 }
 
