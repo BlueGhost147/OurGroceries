@@ -1,7 +1,19 @@
-<mat-expansion-panel (click)="handleClick()">
+<mat-expansion-panel (click)="handleClick()" [hideToggle]="true" class="test">
   <mat-expansion-panel-header>
+    <button mat-button (click)="moveItem()" *ngIf="isLeft"
+            (click)="$event.stopPropagation()"
+            (keydown)="$event.stopPropagation()">
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
     <mat-panel-title>
-    {{ itemCount == null ? 1 : itemCount }}x {{itemName}}
+      <button mat-button (click)="moveItem()" *ngIf="!isLeft"
+              (click)="$event.stopPropagation()"
+              (keydown)="$event.stopPropagation()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+
+        <!-- Wenn Handy Modus soll der Pfeil das Dialogfeld öffnen und nicht das Item verschieben -->
+      </button>
+    {{ itemCount == null ? 1 : itemCount }}x {{itemName.length > 10 ? itemName.substr(0,10) + "..." : itemName}}
     </mat-panel-title>
     <mat-panel-description>
       <mat-checkbox
@@ -12,7 +24,7 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
 
-  <p>Priority: {{itemPriority}}</p>
+  <p>Priority: {{itemService.getPriorityFriendlyName(itemPriority)}}</p>
   <mat-action-row>
     <button mat-button (click)="editItem()">
       <mat-icon>settings_applications</mat-icon>

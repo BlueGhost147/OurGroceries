@@ -87,11 +87,11 @@ class Role(models.Model):
                  )
     role_type = models.IntegerField(choices=role_types)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    list = models.ForeignKey(List, on_delete=models.CASCADE)
+    list = models.ForeignKey(List, related_name="roles", on_delete=models.CASCADE)
     objects = RoleManager()
 
     class Meta:
         verbose_name_plural = "roles"
 
     def __str__(self):
-        return '%s %s (%s)' % (self.role_type, self.user_profile, self.list)
+        return '%s %s (%s)' % (self.role_type, self.user.username, self.list)

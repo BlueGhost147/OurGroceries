@@ -20,6 +20,8 @@ export class SingleItemComponent implements OnInit {
   itemId;
   @Input()
   listType;
+  @Input()
+  isLeft = true;
 
 
   /* Extendable List -> shows Prio bzw. Expiration Date
@@ -34,6 +36,10 @@ export class SingleItemComponent implements OnInit {
 
 
   handleLongClick() {
+
+  }
+
+  moveItem() {
 
   }
 
