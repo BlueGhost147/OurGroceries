@@ -34,14 +34,14 @@ class ItemSerializer(serializers.ModelSerializer):
 
 
 class ListSerializer(serializers.ModelSerializer):
-    owner_name = serializers.SerializerMethodField(),
+    owner_name = serializers.SerializerMethodField()
 
     class Meta:
         model = List
-        fields = '__all__'
+        fields = ['id', 'name', 'location', 'owner', 'owner_name', 'list_type']
 
     def get_owner_name(self, obj):
-        return obj.owner.name if obj.owner else ''
+        return obj.owner.username if obj.owner else ''
 
 
 class UserProfileSerializer(serializers.ModelSerializer):

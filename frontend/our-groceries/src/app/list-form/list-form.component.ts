@@ -21,7 +21,7 @@ export class ListFormComponent implements OnInit {
     this.listFormGroup = this.fb.group({
       id: [null],
       name: ['', Validators.required],
-      owner: [null],
+      owner_name: [null],
       location: [''],
       list_type: [null, Validators.required],
     });
