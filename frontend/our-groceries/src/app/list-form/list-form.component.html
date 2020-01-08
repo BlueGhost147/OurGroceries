@@ -8,15 +8,15 @@
 
   </div>
 <div class="home-grid">
-  <div class="block">
     <form [formGroup]="listFormGroup" class="list-form">
       <mat-form-field>
-        <input matInput type="text" placeholder="Name" formControlName="name">
+        <input matInput type="text" placeholder="Name" formControlName="name" required>
         <mat-hint align="end">name of the list</mat-hint>
+        <mat-error *ngIf="listFormGroup.controls.name.hasError('required')">Name is required</mat-error>
       </mat-form-field>
 
       <mat-form-field>
-        <input matInput type="text" placeholder="Owner" formControlName="owner">
+        <input matInput type="text" placeholder="Owner" formControlName="owner" readonly>
         <mat-hint align="end">owner of the list</mat-hint>
       </mat-form-field>
 
@@ -26,12 +26,13 @@
       </mat-form-field>
 
       <mat-form-field>
-        <mat-select placeholder="List Type" formControlName="list_type">
+        <mat-select placeholder="List Type" formControlName="list_type" required>
           <mat-option [value]="list_type.key"
                       *ngFor="let list_type of listService.listTypes | keyvalue">{{list_type.value}}
           </mat-option>
         </mat-select>
         <mat-hint align="end">type of the list</mat-hint>
+        <mat-error *ngIf="listFormGroup.controls.list_type.hasError('required')">List Type is required</mat-error>
       </mat-form-field>
 
       <br/>
@@ -43,5 +44,4 @@
       </mat-card-actions>
     </form>
   </div>
-</div>
 </div>

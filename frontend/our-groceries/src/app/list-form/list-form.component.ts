@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ListService} from "../services/list.service";
@@ -24,10 +24,10 @@ export class ListFormComponent implements OnInit {
 
     this.listFormGroup = this.fb.group({
       id: [null],
-      name: [''],
+      name: ['', Validators.required],
       owner: [null],
       location: [''],
-      list_type: [null],
+      list_type: [null, Validators.required],
     });
 
   }
