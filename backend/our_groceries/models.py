@@ -41,7 +41,7 @@ class List(models.Model):
                  )
 
     name = models.TextField(max_length=100)
-    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name="owned_lists")
     location = models.TextField(max_length=100, blank=True)
     list_type = models.IntegerField(choices=list_types)
     objects = ListManager()
@@ -67,7 +67,7 @@ class Item(models.Model):
     priority = models.IntegerField(choices=priority_types, default=2)
     amount = models.PositiveIntegerField(null=True)
     accepted = models.BooleanField(default=True)
-    list = models.ForeignKey(List, on_delete=models.CASCADE)
+    list = models.ForeignKey(List, on_delete=models.CASCADE, related_name="items")
     expires = models.DateField(blank=True, default=now, null=True)
     objects = ItemManager()
 
@@ -87,7 +87,7 @@ class Role(models.Model):
                      (4, "Co-owner"),
                  )
     role_type = models.IntegerField(choices=role_types)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="roles", on_delete=models.CASCADE)
     list = models.ForeignKey(List, related_name="roles", on_delete=models.CASCADE)
     objects = RoleManager()
 
