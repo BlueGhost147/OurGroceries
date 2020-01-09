@@ -37,7 +37,7 @@ export class ItemDialogComponent implements OnInit {
         amount: this.data.itemCount,
         priority: this.data.itemPriority,
         checked: this.data.itemChecked,
-        // expires: this.data.itemExpires,
+        expires: this.data.itemExpires,
         list: this.data.itemList
       })
         .subscribe(() => console.log('Created item'));
@@ -49,7 +49,7 @@ export class ItemDialogComponent implements OnInit {
         priority: this.data.itemPriority,
         checked: this.data.itemChecked,
         list: this.data.itemList,
-        // expires: this.data.itemExpires,
+        expires: this.data.itemExpires,
       })
         .subscribe(() => console.log('Updated item'));
     }

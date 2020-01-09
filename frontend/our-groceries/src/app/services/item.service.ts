@@ -10,6 +10,13 @@ export class ItemService {
 
   }
 
+  priorities = {
+    1: 'Low',
+    2: 'Medium',
+    3: 'High'
+  };
+
+
   getItemsFromList(listId) {
       return this.http.get('/api/item/list/' + listId + '/get');
   }
@@ -27,7 +34,7 @@ export class ItemService {
   }
 
   deleteItemById(id) {
-    return this.http.delete('/api/item/' + id + '/delete').subscribe(result => console.log("deleted"));
+    return this.http.delete('/api/item/' + id + '/delete');
   }
 
   getPriorityFriendlyName(number) {

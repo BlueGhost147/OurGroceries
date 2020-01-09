@@ -9,6 +9,20 @@
     <input matInput type="number" placeholder="Amount" [(ngModel)]="this.data.itemCount">
     <mat-hint align="end">Amount of the item</mat-hint>
   </mat-form-field>
+  <mat-form-field>
+    <input matInput type="date" placeholder="Expires" [(ngModel)]="this.data.expires">
+    <mat-hint align="end">Expire date</mat-hint>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Priority" [(value)]="data.itemPriority">
+      <mat-option [value]="prio.key" *ngFor="let prio of itemService.priorities | keyvalue">
+        {{prio.value}}
+      </mat-option>
+    </mat-select>
+    <mat-hint align="end">type of the list</mat-hint>
+  </mat-form-field>
+
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancel</button>

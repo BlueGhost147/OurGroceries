@@ -103,5 +103,8 @@ export class ItemListComponent implements OnInit {
     }
   }
 
+  updatedList($event) {
+    this.updateItems();
+  }
 
 }

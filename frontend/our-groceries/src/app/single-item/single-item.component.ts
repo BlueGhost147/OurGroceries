@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {ItemService} from '../services/item.service';
 import {ItemDialogComponent} from '../item-dialog/item-dialog.component';
 import {MatDialog} from '@angular/material/dialog';
@@ -27,6 +27,8 @@ export class SingleItemComponent implements OnInit {
   @Input()
   listId;
 
+  @Output() refreshParent: EventEmitter<any> = new EventEmitter();
+
 
   /* Extendable List -> shows Prio bzw. Expiration Date
      Popup when Edit List
@@ -49,8 +51,7 @@ export class SingleItemComponent implements OnInit {
   }
 
   deleteItem() {
-    this.itemService.deleteItemById(this.itemId);
-    this.ngOnInit();
+    this.itemService.deleteItemById(this.itemId).subscribe(result => this.refreshParent.emit(this.itemId));
   }
 
   editItem() {
