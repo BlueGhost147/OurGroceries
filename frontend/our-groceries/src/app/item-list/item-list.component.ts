@@ -72,7 +72,7 @@ export class ItemListComponent implements OnInit {
 
   openItemDialog() {
     const dialogRef = this.dialog.open(ItemDialogComponent, {
-      width: '250px',
+      width: '300px',
       data: {
         itemName: '',
         itemCount: 1,
@@ -85,7 +85,7 @@ export class ItemListComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit();
+
     });
   }
 

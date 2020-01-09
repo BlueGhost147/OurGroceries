@@ -65,7 +65,7 @@ export class SingleItemComponent implements OnInit {
 
   openItemDialog() {
     const dialogRef = this.dialog.open(ItemDialogComponent, {
-      width: '250px',
+      width: '300px',
       data: {
         itemName: this.itemName,
         itemCount: this.itemCount,
@@ -73,12 +73,13 @@ export class SingleItemComponent implements OnInit {
         itemChecked: this.itemChecked,
         listType: this.listType,
         itemId: this.itemId,
-        itemList: this.listId
+        itemList: this.listId,
+        updateevent: this.refreshParent
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.ngOnInit();
+      //this.ngOnInit();
     });
   }
 

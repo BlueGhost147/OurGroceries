@@ -1,26 +1,33 @@
 <h1 mat-dialog-title>Edit item</h1>
-<div mat-dialog-content>
+<div mat-dialog-content class="dialog-style">
 
-  <mat-form-field>
+  <mat-form-field [style.width.px]="245">
     <input matInput type="text" placeholder="Name" [(ngModel)]="this.data.itemName">
     <mat-hint align="end">Name of the item</mat-hint>
   </mat-form-field>
-  <mat-form-field>
+  <mat-form-field [style.width.px]="245">
     <input matInput type="number" placeholder="Amount" [(ngModel)]="this.data.itemCount">
     <mat-hint align="end">Amount of the item</mat-hint>
   </mat-form-field>
-  <mat-form-field>
+
+  <mat-form-field [style.width.px]="245" *ngIf="this.data.listType === 1">
+    <!--
     <input matInput type="date" placeholder="Expires" [(ngModel)]="this.data.expires">
-    <mat-hint align="end">Expire date</mat-hint>
+    <mat-hint align="end">Expire date</mat-hint>-->
+
+    <input matInput [matDatepicker]="picker" placeholder="Expiration date" [(ngModel)]="this.data.expires">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-select placeholder="Priority" [(value)]="data.itemPriority">
+  <mat-form-field [style.width.px]="245" *ngIf="this.data.listType === 2">
+    <mat-select placeholder="Priority" [(ngModel)]="this.data.itemPriority">
       <mat-option [value]="prio.key" *ngFor="let prio of itemService.priorities | keyvalue">
         {{prio.value}}
       </mat-option>
     </mat-select>
-    <mat-hint align="end">type of the list</mat-hint>
+    <mat-hint align="end">Priority of the item</mat-hint>
   </mat-form-field>
 
 </div>

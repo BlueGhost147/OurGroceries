@@ -11,6 +11,7 @@ export interface DialogData {
   itemId;
   itemExpires;
   itemList;
+  updateevent;
 }
 
 @Component({
@@ -40,7 +41,9 @@ export class ItemDialogComponent implements OnInit {
         expires: this.data.itemExpires,
         list: this.data.itemList
       })
-        .subscribe(() => console.log('Created item'));
+        .subscribe(() => {
+          this.data.updateevent.emit(this.data.itemId)
+        });
     } else {
       this.itemService.updateItem({
         id: this.data.itemId,
@@ -51,7 +54,9 @@ export class ItemDialogComponent implements OnInit {
         list: this.data.itemList,
         expires: this.data.itemExpires,
       })
-        .subscribe(() => console.log('Updated item'));
+        .subscribe(() => {
+          this.data.updateevent.emit(this.data.itemId)
+        });
     }
   }
 

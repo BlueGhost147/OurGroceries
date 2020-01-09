@@ -23,9 +23,9 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ItemSerializer(serializers.ModelSerializer):
-    storageType = serializers.SerializerMethodField()
+    listType = serializers.SerializerMethodField()
 
-    def get_storageType(self, obj):
+    def get_listType(self, obj):
         return obj.list.list_type
 
     class Meta:
