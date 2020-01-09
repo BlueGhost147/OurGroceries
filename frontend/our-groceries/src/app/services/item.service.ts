@@ -37,6 +37,11 @@ export class ItemService {
       case 3: return "High";
     }
   }
+
+  moveItem(itemId, newListId)
+  {
+    return this.http.put('/api/item/' + itemId + '/move/'+newListId+'/',null);
+  }
 }
 
 

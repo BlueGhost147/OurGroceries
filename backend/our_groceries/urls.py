@@ -40,6 +40,8 @@ urlpatterns = [
     path('item/<int:item_id>/update', views.item_update),
     path('item/<int:item_id>/delete', views.item_update),
 
+    path('item/<int:item_id>/move/<int:list_id>/', views.move_item),
+
     path('item/list/<int:list_id>/get', views.item_by_list),
 
     path('list/list', views.list_list),
@@ -49,12 +51,16 @@ urlpatterns = [
     path('list/<int:list_id>/update', views.list_update),
     path('list/<int:list_id>/delete', views.list_update),
 
+    path('list/<int:list_id>/set/<position>/', views.list_setcurrent),
+
     path('role/list', views.role_list),
     path('role/options', views.role_options),
     path('role/create', views.role_create),
     path('role/<int:role_id>/get', views.role_update),
     path('role/<int:role_id>/update', views.role_update),
     path('role/<int:role_id>/delete', views.role_update),
+
+    path('user/getlists/', views.user_getcurrentlist),
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

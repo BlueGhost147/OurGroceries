@@ -19,26 +19,12 @@ class RoleManager(models.Manager):
     pass
 
 
-class UserProfile(models.Model):
-    # django user account
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    is_admin = models.BooleanField(default=False)
-    year_of_birth = models.IntegerField(blank=True, null=True)
-    objects = UserProfileManager()
-
-    class Meta:
-        verbose_name_plural = "userprofiles"
-
-    def __str__(self):
-        return self.user.username
-
-
 class List(models.Model):
     # Enums
     list_types = (
-                     (1, "Cooled"),
-                     (2, "Shopping"),
-                 )
+        (1, "Cooled"),
+        (2, "Shopping"),
+    )
 
     name = models.TextField(max_length=100)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name="owned_lists")
@@ -53,13 +39,27 @@ class List(models.Model):
         return self.name
 
 
+class UserProfile(models.Model):
+    # django user account
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    list1 = models.ForeignKey(List, on_delete=models.SET_NULL, null=True, blank=True, related_name="activeAs1")
+    list2 = models.ForeignKey(List, on_delete=models.SET_NULL, null=True, blank=True, related_name="activeAs2")
+    objects = UserProfileManager()
+
+    class Meta:
+        verbose_name_plural = "userprofiles"
+
+    def __str__(self):
+        return self.user.username
+
+
 class Item(models.Model):
     # Enums
     priority_types = (
-                         (1, "Low"),
-                         (2, "Medium"),
-                         (3, "High"),
-                     )
+        (1, "Low"),
+        (2, "Medium"),
+        (3, "High"),
+    )
 
     # General Item
     name = models.TextField(max_length=100)
@@ -81,11 +81,11 @@ class Item(models.Model):
 class Role(models.Model):
     # Enums
     role_types = (
-                     (1, "Read"),
-                     (2, "Approval_req"),
-                     (3, "Modify"),
-                     (4, "Co-owner"),
-                 )
+        (1, "Read"),
+        (2, "Approval_req"),
+        (3, "Modify"),
+        (4, "Co-owner"),
+    )
     role_type = models.IntegerField(choices=role_types)
     user = models.ForeignKey(User, related_name="roles", on_delete=models.CASCADE)
     list = models.ForeignKey(List, related_name="roles", on_delete=models.CASCADE)

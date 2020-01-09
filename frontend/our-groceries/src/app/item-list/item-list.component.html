@@ -10,9 +10,21 @@
     </mat-select>
   </mat-form-field>
 
-  <!-- Item List -->
+  <!-- Item List --><!--
   <div *ngFor="let item of items" class="item-list">
-    <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id" [itemPriority]="item.priority" [isLeft]="false" [listId]="this.listId"></app-single-item>
+    <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id" [itemPriority]="item.priority"
+                     [isLeft]="false" [listId]="this.listId"></app-single-item>
+  </div>-->
+
+  <div class="item-list">
+    <div cdkDropList #ditemList="cdkDropList" [id]="listId"
+         class="" (cdkDropListDropped)="dropItem($event)">
+      <div class="" *ngFor="let item of items" cdkDrag [id]="item.id">
+        <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id" [itemPriority]="item.priority"
+                         [isLeft]="false" [listId]="this.listId"></app-single-item>
+      </div>
+      <div class="buffer-div"></div>
+    </div>
   </div>
 
   <div *ngIf="listId!==undefined">
@@ -26,5 +38,8 @@
       New item
     </button>
   </div>
+
+
+
 
 </mat-card>

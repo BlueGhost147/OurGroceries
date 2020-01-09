@@ -33,6 +33,7 @@ import { LockScreenComponent } from './lock-screen/lock-screen.component';
 import {MatIconModule, MatTabsModule} from "@angular/material";
 import {MatExpansionModule} from "@angular/material/expansion";
 import { ItemDialogComponent } from './item-dialog/item-dialog.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -86,6 +87,7 @@ export function tokenGetter() {
     FormsModule,
     MatExpansionModule,
     MatIconModule,
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,15 +1,20 @@
 <div class="home-bg">
 
   <div class="logout-row">
-  <app-logout class="logout-comp"></app-logout>
-  <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="newList()">
-    <mat-icon aria-hidden="false" aria-label="add">add</mat-icon>
-    New list
-  </button>
+    <app-logout class="logout-comp"></app-logout>
+    <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="newList()">
+      <mat-icon aria-hidden="false" aria-label="add">add</mat-icon>
+      New list
+    </button>
 
-</div>
+  </div>
   <div class="home-grid" (swipe)="onListSwipe($event)">
-      <app-item-list class="home-grid-col" [listId]="listId1" [listOptions]="listOptions"></app-item-list>
-      <app-item-list class="home-grid-col mobile-hidden" [listId]="listId2" [listOptions]="listOptions"></app-item-list>
+    <div cdkDropListGroup>
+      <app-item-list class="home-grid-col" [listId]="listId1" [listOptions]="listOptions"
+                     (refreshParent)="updatedLists($event)" [position]="1" [version]="version1"></app-item-list>
+      <app-item-list class="home-grid-col mobile-hidden" [listId]="listId2" [listOptions]="listOptions"
+                     (refreshParent)="updatedLists($event)" [position]="2" [version]="version2">
+      </app-item-list>
+    </div>
   </div>
 </div>

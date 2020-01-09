@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view, permission_classes
 
 from our_groceries.serializers import ItemSerializer, ListSerializer, RoleSerializer, UserSerializer
 
-from our_groceries.models import Item, List, Role
+from our_groceries.models import Item, List, Role, UserProfile
 
 from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS, AllowAny
 from rest_framework.response import Response
@@ -16,7 +16,8 @@ from django.db.models import Q
 def register(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
-        serializer.save()
+        new_user = serializer.save()
+        UserProfile(user=new_user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -44,6 +45,17 @@ def item_create(request):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['PUT'])
+def move_item(request, item_id, list_id):
+    try:
+        item = Item.objects.get(id=item_id)
+        item.list = List.objects.get(id=list_id)
+        item.save()
+        return Response(status=status.HTTP_202_ACCEPTED)
+    except Item.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
 @api_view(['GET'])
 def item_by_list(request, list_id):
     try:
@@ -53,6 +65,43 @@ def item_by_list(request, list_id):
 
     serializer = ItemSerializer(item, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def list_setcurrent(request, list_id, position):
+    user_id = request.user.id
+    try:
+        user_profile = UserProfile.objects.get(user__id=user_id)
+        list = List.objects.get(id=list_id)
+        if position == '1':
+            user_profile.list1 = list
+            user_profile.save()
+            return Response(status=status.HTTP_200_OK)
+        elif position == '2':
+            user_profile.list2 = list
+            user_profile.save()
+            return Response(status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+    except List.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    except UserProfile.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+def user_getcurrentlist(request):
+    user_id = request.user.id
+    try:
+        user_profile = UserProfile.objects.get(user__id=user_id)
+        current_list = []
+        if user_profile.list1 is not None:
+            current_list.append(user_profile.list1.id)
+        if user_profile.list2 is not None:
+            current_list.append(user_profile.list2.id)
+        return Response(current_list, status=status.HTTP_200_OK)
+    except UserProfile.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 # GET => Return the item of the given id

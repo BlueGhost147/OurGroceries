@@ -23,5 +23,11 @@ export class ListService {
     return this.http.get('/api/list/list');
   }
 
+  getCurrentLists(){
+    return this.http.get('/api/user/getlists/');
+  }
 
+  setCurrentLists(listId, position){
+    return this.http.get('/api/list/'+listId+'/set/'+position+'/');
+  }
 }
