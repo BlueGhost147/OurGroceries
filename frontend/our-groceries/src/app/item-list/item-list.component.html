@@ -20,7 +20,7 @@
     <div cdkDropList #ditemList="cdkDropList" [id]="listId"
          class="" (cdkDropListDropped)="dropItem($event)">
       <div class="" *ngFor="let item of items" cdkDrag [id]="item.id">
-        <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id" [itemPriority]="item.priority" [listType]="item.listType"
+        <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id" [itemPriority]="item.priority" [listType]="item.listType" [itemExpires]="item.expires" [itemChecked]="item.checked"
                          [isLeft]="false" [listId]="this.listId" (refreshParent)="updatedList($event)"></app-single-item>
       </div>
       <div class="buffer-div"></div>

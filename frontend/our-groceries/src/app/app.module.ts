@@ -34,6 +34,7 @@ import {MatIconModule, MatTabsModule} from "@angular/material";
 import {MatExpansionModule} from "@angular/material/expansion";
 import { ItemDialogComponent } from './item-dialog/item-dialog.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import {DatePipe} from "@angular/common";
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -89,7 +90,7 @@ export function tokenGetter() {
     MatIconModule,
     DragDropModule,
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
   entryComponents: [SingleItemComponent, ItemListComponent, ItemDialogComponent],
 })

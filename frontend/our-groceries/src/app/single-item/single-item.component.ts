@@ -26,6 +26,8 @@ export class SingleItemComponent implements OnInit {
   isLeft = true;
   @Input()
   listId;
+  @Input()
+  itemExpires;
 
   @Output() refreshParent: EventEmitter<any> = new EventEmitter();
 
@@ -64,8 +66,9 @@ export class SingleItemComponent implements OnInit {
 
 
   openItemDialog() {
+    const dialogWidth = '300px';
     const dialogRef = this.dialog.open(ItemDialogComponent, {
-      width: '300px',
+      width: dialogWidth,
       data: {
         itemName: this.itemName,
         itemCount: this.itemCount,
@@ -74,7 +77,8 @@ export class SingleItemComponent implements OnInit {
         listType: this.listType,
         itemId: this.itemId,
         itemList: this.listId,
-        updateevent: this.refreshParent
+        updateevent: this.refreshParent,
+        itemExpires: this.itemExpires
       }
     });
 

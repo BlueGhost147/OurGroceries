@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Edit item</h1>
-<div mat-dialog-content class="dialog-style">
+<div mat-dialog-content class="dialog-style" [style.height.px]="240">
 
   <mat-form-field [style.width.px]="245">
     <input matInput type="text" placeholder="Name" [(ngModel)]="this.data.itemName">
@@ -15,20 +15,24 @@
     <input matInput type="date" placeholder="Expires" [(ngModel)]="this.data.expires">
     <mat-hint align="end">Expire date</mat-hint>-->
 
-    <input matInput [matDatepicker]="picker" placeholder="Expiration date" [(ngModel)]="this.data.expires">
+    <input matInput [matDatepicker]="picker" placeholder="Expiration date" [(ngModel)]="this.data.itemExpires">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
 
   </mat-form-field>
 
   <mat-form-field [style.width.px]="245" *ngIf="this.data.listType === 2">
-    <mat-select placeholder="Priority" [(ngModel)]="this.data.itemPriority">
-      <mat-option [value]="prio.key" *ngFor="let prio of itemService.priorities | keyvalue">
+    <mat-select placeholder = "Priority" [(ngModel)] = "this.data.itemPriority">
+      <mat-option *ngFor="let prio of itemService.priorities | keyvalue" [value]="prio.key">
         {{prio.value}}
       </mat-option>
     </mat-select>
     <mat-hint align="end">Priority of the item</mat-hint>
   </mat-form-field>
+
+  <div style="width: 245px;" *ngIf="this.data.listType === 2">
+  <mat-checkbox [(ngModel)] = "this.data.itemChecked">Checked</mat-checkbox>
+  </div>
 
 </div>
 <div mat-dialog-actions>

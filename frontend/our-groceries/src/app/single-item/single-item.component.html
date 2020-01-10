@@ -1,22 +1,26 @@
 <mat-expansion-panel (click)="handleClick()" [hideToggle]="true" class="test">
   <mat-expansion-panel-header>
+    <!--
     <button mat-button (click)="moveItem()" *ngIf="isLeft"
             (click)="$event.stopPropagation()"
             (keydown)="$event.stopPropagation()">
       <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>
+    </button>-->
     <mat-panel-title>
+      <!--
       <button mat-button (click)="moveItem()" *ngIf="!isLeft"
               (click)="$event.stopPropagation()"
               (keydown)="$event.stopPropagation()">
         <mat-icon>keyboard_arrow_left</mat-icon>
 
-        <!-- Wenn Handy Modus soll der Pfeil das Dialogfeld öffnen und nicht das Item verschieben -->
-      </button>
+      </button>-->
     {{ itemCount == null ? 1 : itemCount }}x {{itemName.length > 10 ? itemName.substr(0,10) + "..." : itemName}}
     </mat-panel-title>
-    <mat-panel-description>
-      <mat-checkbox
+    <mat-panel-description *ngIf="listType === 1" class="right">
+      <span class="right">{{itemExpires}}</span>
+    </mat-panel-description>
+    <mat-panel-description *ngIf="listType === 2">
+      <mat-checkbox [(ngModel)] = "itemChecked"
                     (click)="$event.stopPropagation()"
                     (keydown)="$event.stopPropagation()" >
         In Cart
@@ -26,11 +30,11 @@
 
   <p>Priority: {{itemService.getPriorityFriendlyName(itemPriority)}}</p>
   <mat-action-row>
-    <button mat-button (click)="editItem()">
+    <button mat-button (click)="editItem()" color="primary">
       <mat-icon>settings_applications</mat-icon>
       Edit
     </button>
-    <button mat-button (click)="deleteItem()">
+    <button mat-button (click)="deleteItem()" color="primary">
       <mat-icon>delete</mat-icon>
       Delete
     </button>

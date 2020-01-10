@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {ItemService} from '../services/item.service';
+import {DatePipe} from "@angular/common";
 
 export interface DialogData {
   itemName;
@@ -23,9 +24,9 @@ export class ItemDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ItemDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, private itemService: ItemService
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, private itemService: ItemService, public datepipe: DatePipe
   ) {
-  }
+}
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -37,9 +38,9 @@ export class ItemDialogComponent implements OnInit {
         name: this.data.itemName,
         amount: this.data.itemCount,
         priority: this.data.itemPriority,
-        checked: this.data.itemChecked,
-        expires: this.data.itemExpires,
-        list: this.data.itemList
+        checked: this.data.itemChecked === undefined ? false : this.data.itemChecked,
+        list: this.data.itemList,
+        expires: this.datepipe.transform(this.data.itemExpires, 'yyyy-MM-dd'),
       })
         .subscribe(() => {
           this.data.updateevent.emit(this.data.itemId)
@@ -50,9 +51,9 @@ export class ItemDialogComponent implements OnInit {
         name: this.data.itemName,
         amount: this.data.itemCount,
         priority: this.data.itemPriority,
-        checked: this.data.itemChecked,
+        checked: this.data.itemChecked === undefined ? false : this.data.itemChecked,
         list: this.data.itemList,
-        expires: this.data.itemExpires,
+        expires: this.datepipe.transform(this.data.itemExpires, 'yyyy-MM-dd'),
       })
         .subscribe(() => {
           this.data.updateevent.emit(this.data.itemId)
