@@ -24,3 +24,14 @@
   width: 100%;
   height: 5px;
 }
+
+.overflow-buffer
+{
+  overflow-y: scroll;
+  max-height: 69vh;
+  -ms-overflow-style: none;
+}
+
+.overflow-buffer::-webkit-scrollbar {
+  display: none;
+}

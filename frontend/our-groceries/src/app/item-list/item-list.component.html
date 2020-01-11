@@ -16,7 +16,7 @@
                      [isLeft]="false" [listId]="this.listId"></app-single-item>
   </div>-->
 
-  <div class="item-list">
+  <div class="item-list overflow-buffer">
     <div cdkDropList #ditemList="cdkDropList" [id]="listId"
          class="" (cdkDropListDropped)="dropItem($event)">
       <div class="" *ngFor="let item of items" cdkDrag [id]="item.id">
