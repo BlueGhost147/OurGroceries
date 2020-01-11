@@ -57,7 +57,7 @@ export class ItemListComponent implements OnInit {
 
       this.itemService.getItemsFromList(this.listId)
         .subscribe((response: any[]) => {
-          this.items = response;
+          this.items = this.sortItemsByPrio(response);
         });
     }
   }
@@ -107,4 +107,18 @@ export class ItemListComponent implements OnInit {
     this.updateItems();
   }
 
+  sortItemsByPrio(items)
+  {
+    return items.sort((item1,item2) => {
+      if (item1.priority < item2.priority) {
+        return 1;
+      }
+
+      if (item1.priority > item2.priority) {
+        return -1;
+      }
+
+      return 0;
+    });
+  }
 }
