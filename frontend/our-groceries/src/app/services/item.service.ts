@@ -11,9 +11,9 @@ export class ItemService {
   }
 
   priorities = {
-    '1': 'Low',
-    '2': 'Medium',
-    '3': 'High'
+    1: 'Low',
+    2: 'Medium',
+    3: 'High'
   };
 
 

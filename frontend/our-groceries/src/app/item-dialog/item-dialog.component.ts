@@ -65,5 +65,7 @@ export class ItemDialogComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
+  toInt(key: string) {
+    return parseInt(key, 10);
+  }
 }
