@@ -23,8 +23,6 @@ export class SingleItemComponent implements OnInit {
   @Input()
   listType;
   @Input()
-  isLeft = true;
-  @Input()
   listId;
   @Input()
   itemExpires;
@@ -44,13 +42,9 @@ export class SingleItemComponent implements OnInit {
   }
 
 
-  handleLongClick() {
-
-  }
-
-  moveItem() {
-
-  }
+getExpireDateDays() {
+  return Math.floor(Math.abs(<any>new Date() - <any>new Date(this.itemExpires)) / (1000*60*60*24));
+}
 
   deleteItem() {
     this.itemService.deleteItemById(this.itemId).subscribe(result => this.refreshParent.emit(this.itemId));

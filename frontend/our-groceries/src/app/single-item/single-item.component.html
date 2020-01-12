@@ -1,19 +1,6 @@
 <mat-expansion-panel (click)="handleClick()" [hideToggle]="true" class="test">
   <mat-expansion-panel-header>
-    <!--
-    <button mat-button (click)="moveItem()" *ngIf="isLeft"
-            (click)="$event.stopPropagation()"
-            (keydown)="$event.stopPropagation()">
-      <mat-icon>keyboard_arrow_right</mat-icon>
-    </button>-->
     <mat-panel-title>
-      <!--
-      <button mat-button (click)="moveItem()" *ngIf="!isLeft"
-              (click)="$event.stopPropagation()"
-              (keydown)="$event.stopPropagation()">
-        <mat-icon>keyboard_arrow_left</mat-icon>
-
-      </button>-->
     {{ itemCount == null ? 1 : itemCount }}x {{itemName.length > 10 ? itemName.substr(0,10) + "..." : itemName}}
     </mat-panel-title>
     <mat-panel-description *ngIf="listType === 1" class="right">
@@ -28,7 +15,8 @@
     </mat-panel-description>
   </mat-expansion-panel-header>
 
-  <p>Priority: {{itemService.getPriorityFriendlyName(itemPriority)}}</p>
+  <p *ngIf="itemPriority">Priority: {{itemService.getPriorityFriendlyName(itemPriority)}}</p>
+  <p *ngIf="itemExpires">Expires in {{getExpireDateDays()}} Days ({{itemExpires}})</p>
   <mat-action-row>
     <button mat-button (click)="editItem()" color="primary">
       <mat-icon>settings_applications</mat-icon>
