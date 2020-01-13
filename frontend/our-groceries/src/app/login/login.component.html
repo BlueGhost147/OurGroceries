@@ -1,12 +1,14 @@
 <form class="login-form" [formGroup]="loginFormGroup" (ngSubmit)="login()">
   <mat-form-field class="login-field">
     <input matInput placeholder="Username" formControlName="username" name="username" required>
+    <mat-error *ngIf="loginFormGroup.controls.username.hasError('required')">Username required</mat-error>
   </mat-form-field>
   <mat-form-field class="login-field">
     <input matInput placeholder="Password" formControlName="password" type="password" name="password"
            required>
+    <mat-error *ngIf="loginFormGroup.controls.password.hasError('required')">Password required</mat-error>
   </mat-form-field>
   <div class="login-action">
-    <button mat-raised-button class="login-button" type="submit" color="primary">Login</button>
+    <button mat-raised-button class="login-button" type="submit" color="primary" [disabled]="!loginFormGroup.valid">Login</button>
   </div>
 </form>

@@ -27,6 +27,7 @@ export class RegisterComponent implements OnInit {
       username: ['', Validators.required],
       email: ['', [this.emailValidator(), Validators.required]],
       password: ['', Validators.required],
+      password2: ['', [this.passwordValidator(), Validators.required]],
     });
   }
 
@@ -67,6 +68,15 @@ export class RegisterComponent implements OnInit {
       const emailRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
       const validEmail = emailRegex.test(control.value) || /space/.test(control.value);
       return validEmail ? null : {'invalidEmail': {value: control.value}};
+    };
+  }
+
+  passwordValidator(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      if(this.registerFormGroup === undefined) return null;
+      const pw1 = this.registerFormGroup.controls.password.value;
+      const validPW = control.value === pw1;
+      return validPW ? null : {'invalidPW': {value: control.value}};
     };
   }
 }
