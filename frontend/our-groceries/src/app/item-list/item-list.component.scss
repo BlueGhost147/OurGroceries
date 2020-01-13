@@ -1,32 +1,26 @@
-.item-list
-{
+.item-list {
   width: 100%;
 }
 
-.list-select
-{
+.list-select {
   width: 100%;
 
 }
 
-.list-select-option
-{
+.list-select-option {
   z-index: 99;
 }
 
-.item-list-card, .mat-card
-{
+.item-list-card, .mat-card {
   background-color: #FFFFFFCC !important;
 }
 
-.buffer-div
-{
+.buffer-div {
   width: 100%;
   height: 5px;
 }
 
-.overflow-buffer
-{
+.overflow-buffer {
   overflow-y: scroll;
   max-height: 69vh;
   -ms-overflow-style: none;
@@ -35,3 +29,35 @@
 .overflow-buffer::-webkit-scrollbar {
   display: none;
 }
+
+.cool-list {
+  background-color: #BBDEFBCC !important;
+}
+
+.shop-list {
+  background-color: #FFECB3CC !important;
+}
+
+.list-icon {
+  float: right;
+  z-index: 999;
+}
+
+.list-icon-cool {
+  color: #002984 !important;
+}
+
+.list-icon-shop {
+  color: #ff8f00 !important;
+}
+
+.cool-list-ico:before {
+  content: "\eb3b";
+  font-family: "Material Icons";
+}
+
+.shop-list-ico:before {
+  content: "\e8cc";
+  font-family: "Material Icons";
+}
+

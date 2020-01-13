@@ -3,7 +3,7 @@ import {ItemService} from '../services/item.service';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import {ItemDialogComponent} from "../item-dialog/item-dialog.component";
-import { EventEmitter } from '@angular/core';
+import {EventEmitter} from '@angular/core';
 import {moveItemInArray} from "@angular/cdk/drag-drop";
 import {ListService} from "../services/list.service";
 
@@ -14,6 +14,7 @@ import {ListService} from "../services/list.service";
 })
 export class ItemListComponent implements OnInit {
   items;
+  listTyp;
 
   @Input()
   listId;
@@ -45,8 +46,15 @@ export class ItemListComponent implements OnInit {
       .subscribe(() => this.ngOnInit());
   }
 
-  updateListSelection(newListId) {
-    this.listId = newListId;
+  updateListSelection(event) {
+
+    const target = event.source.selected._element.nativeElement;
+    const selectedData = {
+      value: event.value,
+      text: target.innerText.trim().split(/ (.+)/)[1]
+    };
+
+    this.listId = selectedData.value;
     this.updateItems();
   }
 
@@ -58,6 +66,9 @@ export class ItemListComponent implements OnInit {
       this.itemService.getItemsFromList(this.listId)
         .subscribe((response: any[]) => {
           this.items = this.sortItemsByPrio(response);
+          if (this.items && this.items.length > 0) {
+            this.listTyp = this.items[0].listType;
+          }
         });
     }
   }
@@ -97,8 +108,7 @@ export class ItemListComponent implements OnInit {
       this.itemService.moveItem(itemId, listIdNew).subscribe(result => {
         this.refreshParent.emit(this.listId);
       });
-    }
-    else {
+    } else {
       moveItemInArray(this.items, event.previousIndex, event.currentIndex)
     }
   }
@@ -107,9 +117,8 @@ export class ItemListComponent implements OnInit {
     this.updateItems();
   }
 
-  sortItemsByPrio(items)
-  {
-    return items.sort((item1,item2) => {
+  sortItemsByPrio(items) {
+    return items.sort((item1, item2) => {
       if (item1.priority < item2.priority) {
         return 1;
       }
@@ -121,4 +130,5 @@ export class ItemListComponent implements OnInit {
       return 0;
     });
   }
+
 }
