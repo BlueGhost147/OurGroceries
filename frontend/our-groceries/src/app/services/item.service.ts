@@ -49,6 +49,11 @@ export class ItemService {
   {
     return this.http.put('/api/item/' + itemId + '/move/'+newListId+'/',null);
   }
+
+  setItemChecked(itemId, checked)
+  {
+    return this.http.put('/api/item/' +itemId+ '/checked', {'checked': checked});
+  }
 }
 
 

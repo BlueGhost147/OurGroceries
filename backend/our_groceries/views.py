@@ -46,6 +46,18 @@ def item_create(request):
 
 
 @api_view(['PUT'])
+def item_checked(request, item_id):
+    checked = request.data['checked']
+    try:
+        item = Item.objects.get(id=item_id)
+        item.checked = checked
+        item.save()
+        return Response(status=status.HTTP_202_ACCEPTED)
+    except Item.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['PUT'])
 def move_item(request, item_id, list_id):
     try:
         item = Item.objects.get(id=item_id)

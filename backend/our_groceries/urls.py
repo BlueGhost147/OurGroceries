@@ -40,6 +40,8 @@ urlpatterns = [
     path('item/<int:item_id>/update', views.item_update),
     path('item/<int:item_id>/delete', views.item_update),
 
+    path('item/<int:item_id>/checked', views.item_checked),
+
     path('item/<int:item_id>/move/<int:list_id>/', views.move_item),
 
     path('item/list/<int:list_id>/get', views.item_by_list),
