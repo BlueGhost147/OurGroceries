@@ -43,7 +43,8 @@ export class ItemDialogComponent implements OnInit {
         expires: this.datepipe.transform(this.data.itemExpires, 'yyyy-MM-dd'),
       })
         .subscribe(() => {
-          this.data.updateevent.emit(this.data.itemId)
+          if(this.data.updateevent !== undefined){
+            this.data.updateevent.emit(this.data.itemId)}
         });
     } else {
       this.itemService.updateItem({
@@ -56,7 +57,8 @@ export class ItemDialogComponent implements OnInit {
         expires: this.datepipe.transform(this.data.itemExpires, 'yyyy-MM-dd'),
       })
         .subscribe(() => {
-          this.data.updateevent.emit(this.data.itemId)
+          if(this.data.updateevent !== undefined){
+          this.data.updateevent.emit(this.data.itemId)}
         });
     }
   }

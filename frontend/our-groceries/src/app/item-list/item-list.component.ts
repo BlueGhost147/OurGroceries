@@ -89,14 +89,14 @@ export class ItemListComponent implements OnInit {
         itemCount: 1,
         itemPriority: undefined,
         itemChecked: false,
-        listType: undefined,
+        listType: this.listTyp,
         itemId: undefined,
-        itemList: this.listId
+        itemList: this.listId,
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-
+      this.updateItems();
     });
   }
 
