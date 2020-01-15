@@ -27,6 +27,8 @@ export class SingleItemComponent implements OnInit {
   @Input()
   itemExpires;
 
+  dayExpries;
+
   @Output() refreshParent: EventEmitter<any> = new EventEmitter();
 
 
@@ -43,7 +45,7 @@ export class SingleItemComponent implements OnInit {
 
 
 getExpireDateDays() {
-  return Math.floor(Math.abs(<any>new Date() - <any>new Date(this.itemExpires)) / (1000*60*60*24));
+  return (Math.floor((<any>new Date() - <any>new Date(this.itemExpires)) / (1000*60*60*24))) * (-1);
 }
 
   deleteItem() {
@@ -55,7 +57,7 @@ getExpireDateDays() {
   }
 
   ngOnInit() {
-
+    this.dayExpries = this.getExpireDateDays();
   }
 
 

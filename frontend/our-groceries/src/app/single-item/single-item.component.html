@@ -1,22 +1,26 @@
 <mat-expansion-panel (click)="handleClick()" [hideToggle]="true" class="test">
   <mat-expansion-panel-header>
     <mat-panel-title>
-    {{ itemCount == null ? 1 : itemCount }}x {{itemName.length > 10 ? itemName.substr(0,10) + "..." : itemName}}
+      {{ itemCount == null ? 1 : itemCount }}x {{itemName.length > 10 ? itemName.substr(0,10) + "..." : itemName}}
     </mat-panel-title>
     <mat-panel-description *ngIf="listType === 1" class="right">
       <span class="right">{{itemExpires}}</span>
     </mat-panel-description>
-    <mat-panel-description *ngIf="listType === 2">
-      <mat-checkbox [(ngModel)] = "itemChecked"
+    <mat-panel-description *ngIf="listType === 2" class="right">
+      <mat-checkbox [(ngModel)]="itemChecked"
                     (click)="$event.stopPropagation()"
-                    (keydown)="$event.stopPropagation()" >
+                    (keydown)="$event.stopPropagation()">
         In Cart
       </mat-checkbox>
     </mat-panel-description>
   </mat-expansion-panel-header>
 
   <p *ngIf="itemPriority">Priority: {{itemService.getPriorityFriendlyName(itemPriority)}}</p>
-  <p *ngIf="itemExpires">Expires in {{getExpireDateDays()}} Days ({{itemExpires}})</p>
+  <div *ngIf="listType === 1 && itemExpires">
+    <p *ngIf="dayExpries > 0">Expires in {{dayExpries}} days ({{itemExpires}})</p>
+    <p *ngIf="dayExpries == 0">Expires today</p>
+    <p *ngIf="dayExpries < 0">Expired {{dayExpries* (-1)}} days ago ({{itemExpires}})</p>
+  </div>
   <mat-action-row>
     <button mat-button (click)="editItem()" color="primary">
       <mat-icon>settings_applications</mat-icon>
