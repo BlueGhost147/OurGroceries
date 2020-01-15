@@ -44,9 +44,9 @@ export class SingleItemComponent implements OnInit {
   }
 
 
-getExpireDateDays() {
-  return (Math.floor((<any>new Date() - <any>new Date(this.itemExpires)) / (1000*60*60*24))) * (-1);
-}
+  getExpireDateDays() {
+    return (Math.floor((<any>new Date() - <any>new Date(this.itemExpires)) / (1000 * 60 * 60 * 24))) * (-1);
+  }
 
   deleteItem() {
     this.itemService.deleteItemById(this.itemId).subscribe(result => this.refreshParent.emit(this.itemId));
@@ -57,7 +57,8 @@ getExpireDateDays() {
   }
 
   ngOnInit() {
-    this.dayExpries = this.getExpireDateDays();
+    if (this.itemExpires)
+      this.dayExpries = this.getExpireDateDays();
   }
 
 

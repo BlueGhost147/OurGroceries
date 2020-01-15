@@ -19,7 +19,7 @@
   <div *ngIf="listType === 1 && itemExpires">
     <p *ngIf="dayExpries > 0">Expires in {{dayExpries}} days ({{itemExpires}})</p>
     <p *ngIf="dayExpries == 0">Expires today</p>
-    <p *ngIf="dayExpries < 0">Expired {{dayExpries* (-1)}} days ago ({{itemExpires}})</p>
+    <p *ngIf="dayExpries < 0">Expired {{dayExpries * (-1)}} days ago ({{itemExpires}})</p>
   </div>
   <mat-action-row>
     <button mat-button (click)="editItem()" color="primary">
