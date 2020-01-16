@@ -63,6 +63,8 @@ urlpatterns = [
     path('role/<int:role_id>/delete', views.role_update),
 
     path('user/getlists/', views.user_getcurrentlist),
+    path('user/getAllItems/', views.user_getAllItems),
+
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

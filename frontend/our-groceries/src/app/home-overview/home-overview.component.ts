@@ -16,6 +16,9 @@ export class HomeOverviewComponent implements OnInit {
   version1 = 0;
   version2 = 0;
 
+  expireItems = {};
+  existExpireItems = false;
+
   constructor(private route: ActivatedRoute, private router: Router, private listService: ListService) {
   }
 
@@ -29,11 +32,30 @@ export class HomeOverviewComponent implements OnInit {
         this.listId1 = response[0];
         this.listId2 = response[1];
       });
+    this.checkExpireItems();
+  }
+
+  checkExpireItems() {
+    this.listService.getAllItems().subscribe((response: any[]) => {
+      response.forEach((itm) => {
+        let temp = this.calculateExpireDateDays(itm.expires);
+        //Add all items, that are about to expire to list
+        if (temp <= 4) {
+          this.expireItems[itm.name] = temp;
+          this.existExpireItems = true;
+        }
+      })
+
+    });
 
   }
 
   onListSwipe(event) {
     // alert("swipe");
+  }
+
+  calculateExpireDateDays(dt) {
+    return (Math.floor((<any>new Date() - <any>new Date(dt)) / (1000 * 60 * 60 * 24))) * (-1);
   }
 
   newList() {

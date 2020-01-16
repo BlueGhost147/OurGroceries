@@ -116,6 +116,14 @@ def user_getcurrentlist(request):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 
+@api_view(['GET'])
+def user_getAllItems(request):
+    user_id = request.user.id;
+    items = Item.objects.filter(list__owner=user_id)
+    serializer = ItemSerializer(items, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
+
+
 # GET => Return the item of the given id
 # PUT => Update a item
 # DELETE => Delete the item

@@ -30,4 +30,9 @@ export class ListService {
   setCurrentLists(listId, position){
     return this.http.get('/api/list/'+listId+'/set/'+position+'/');
   }
+
+  //Maybe move this to another service
+  getAllItems() {
+    return this.http.get('/api/user/getAllItems/');
+  }
 }

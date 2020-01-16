@@ -7,6 +7,14 @@
       New list
     </button>
 
+    <div class="expireWarning" *ngIf="existExpireItems">
+      <!-- List items that are about to expire -->
+      <p *ngFor="let item of expireItems | keyvalue">
+        {{item.key}} expires in {{item.value}} days
+      </p>
+
+    </div>
+
   </div>
   <div class="home-grid" (swipe)="onListSwipe($event)">
     <div cdkDropListGroup>
