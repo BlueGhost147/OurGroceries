@@ -49,7 +49,7 @@ export class RoleListComponent implements OnInit {
   openRoleDialog(role) {
     const dialogRef = this.dialog.open(RoleDialogComponent, {
       width: '250px',
-      data: {roleOptions: this.roleOptions, role}
+      data: {role}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -59,7 +59,11 @@ export class RoleListComponent implements OnInit {
 
   createRoleDialog() {
     // Opens a dialog to create a new role -> list_id is a constant
-    const newRole = {list_id: this.list_id};
+    const newRole = {
+      list: this.list_id,
+      role: undefined,
+      role_type: undefined
+    };
     this.openRoleDialog(newRole);
   }
 

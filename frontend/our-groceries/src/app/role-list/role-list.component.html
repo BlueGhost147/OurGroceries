@@ -9,7 +9,7 @@
 
   <ng-container matColumnDef="role_type">
     <th mat-header-cell *matHeaderCellDef>Role Type</th>
-    <td mat-cell *matCellDef="let role">{{role.role_type}}</td>
+    <td mat-cell *matCellDef="let role">{{listService.role_types[role.role_type]}}</td>
   </ng-container>
 
   <ng-container matColumnDef="id">

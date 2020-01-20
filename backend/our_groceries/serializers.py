@@ -51,15 +51,11 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 
 class RoleSerializer(serializers.ModelSerializer):
-    user_name = serializers.SerializerMethodField(),
-    list_name = serializers.SerializerMethodField(),
+    user_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Role
-        fields = '__all__'
+        fields = ['id', 'role_type', 'user', 'user_name', 'list']
 
     def get_user_name(self, obj):
-        return obj.user.user_name if obj.user else ''
-
-    def get_role_name(self, obj):
-        return obj.role.name if obj.role else ''
+        return obj.user.username if obj.user else ''
