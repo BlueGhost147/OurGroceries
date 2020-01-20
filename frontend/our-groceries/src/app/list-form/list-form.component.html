@@ -44,5 +44,8 @@
         </button>
       </mat-card-actions>
     </form>
-  </div>
+
+  <app-role-list *ngIf="listFormGroup.controls.id.value" [list_id]="list_id"></app-role-list>
+
+</div>
 </div>

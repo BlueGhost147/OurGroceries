@@ -124,6 +124,13 @@ def user_getAllItems(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@api_view(['GET'])
+def user_list(request):
+    users = UserProfile.objects.all()
+    serializer = UserSerializer(users, many=True)
+    return Response(serializer.data)
+
+
 # GET => Return the item of the given id
 # PUT => Update a item
 # DELETE => Delete the item
@@ -204,13 +211,14 @@ def list_update(request, list_id):
 @api_view(['GET'])
 def role_list(request):
     roles = Role.objects.all()
+    #role = Role.objects.filter(list__id=list_id)
     serializer = RoleSerializer(roles, many=True)
     return Response(serializer.data)
 
 
 @api_view(['GET'])
-def role_options(request):
-    roles = Role.objects.all()
+def role_options(request, list_id):
+    roles = Role.objects.filter(list__id=list_id)
     serializer = RoleSerializer(roles, many=True)
     return Response(serializer.data)
 

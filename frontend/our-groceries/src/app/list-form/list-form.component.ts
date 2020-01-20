@@ -12,6 +12,8 @@ import {ListService} from "../services/list.service";
 export class ListFormComponent implements OnInit {
 
   listFormGroup;
+  role_id;
+  list_id;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, public listService: ListService,
               private router: Router) { }

@@ -1,0 +1,25 @@
+.mat-header-cell, .mat-cell
+{
+  padding: 10px;
+}
+
+.role-list {
+  display: flex;
+  flex-direction: column;
+  width: 25rem;
+  margin: 15px auto;
+  background-color: #FFFFFFCC;
+  padding: 15px 15px 15px 20px;
+  border-radius: 5px;
+}
+
+.role-header
+{
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  width: 100%;
+  margin: auto;
+  text-align: center;
+  align-self: center;
+  color: green;
+}

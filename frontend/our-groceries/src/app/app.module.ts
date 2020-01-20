@@ -36,6 +36,8 @@ import { ItemDialogComponent } from './item-dialog/item-dialog.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {DatePipe} from '@angular/common';
 import {HttperrorInterceptor} from './httperror.interceptor';
+import { RoleDialogComponent } from './role-dialog/role-dialog.component';
+import { RoleListComponent } from './role-list/role-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -54,6 +56,8 @@ export function tokenGetter() {
     ListFormComponent,
     LockScreenComponent,
     ItemDialogComponent,
+    RoleDialogComponent,
+    RoleListComponent,
   ],
   imports: [
     BrowserModule,
@@ -98,6 +102,6 @@ export function tokenGetter() {
     deps: [MatSnackBar]
   }],
   bootstrap: [AppComponent],
-  entryComponents: [SingleItemComponent, ItemListComponent, ItemDialogComponent],
+  entryComponents: [SingleItemComponent, ItemListComponent, ItemDialogComponent, RoleDialogComponent],
 })
 export class AppModule { }

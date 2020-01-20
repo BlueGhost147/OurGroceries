@@ -1,0 +1,27 @@
+<h1 mat-dialog-title>Edit Role</h1>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-select placeholder="User" [(ngModel)]="this.data.role.user_name">
+      <mat-option [value]="roleOption.id" *ngFor="let roleOption of roleOptions | keyvalue" >
+        {{roleOption.user_name}}
+      </mat-option>
+    </mat-select>
+    <mat-hint align="end">user of the role</mat-hint>
+  </mat-form-field>
+
+
+  <mat-form-field>
+    <mat-select placeholder="Role Type" [(ngModel)]="this.data.role.role_types">
+      <mat-option [value]="roleOption" *ngFor="let roleOption of listService.role_types | keyvalue" >
+        {{roleOption.value}}
+      </mat-option>
+    </mat-select>
+    <mat-hint align="end">role type of the user</mat-hint>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button (click)="saveRole()" [mat-dialog-close]="data.role.id" cdkFocusInitial>Save</button>
+</div>
+
+

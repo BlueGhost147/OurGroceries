@@ -87,8 +87,8 @@ class Role(models.Model):
         (4, "Co-owner"),
     )
     role_type = models.IntegerField(choices=role_types)
-    user = models.ForeignKey(User, related_name="roles", on_delete=models.CASCADE)
-    list = models.ForeignKey(List, related_name="roles", on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name="roles", on_delete=models.CASCADE, null=True)
+    list = models.ForeignKey(List, related_name="roles", on_delete=models.CASCADE, null=True)
     objects = RoleManager()
 
     class Meta:

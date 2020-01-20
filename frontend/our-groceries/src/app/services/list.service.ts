@@ -11,6 +11,13 @@ export class ListService {
     2: 'Shopping'
   };
 
+  role_types = {
+    1: 'Read',
+    2: 'Approval_req',
+    3: 'Modify',
+    4: 'Co-owner'
+  };
+
   constructor(private http: HttpClient) {
   }
 
@@ -34,5 +41,24 @@ export class ListService {
   //Maybe move this to another service
   getAllItems() {
     return this.http.get('/api/user/getAllItems/');
+  }
+
+
+
+  getRole(id) {
+    return this.http.get('/api/role/options/' + id);
+  }
+
+
+  createRole(role) {
+    return this.http.post('/api/role/create', role);
+  }
+
+  updateRole(role) {
+    return this.http.put('/api/role/' + role.id + '/update', role);
+  }
+
+  deleteRole(role) {
+    return this.http.delete('/api/role/' + role.id + '/delete');
   }
 }
