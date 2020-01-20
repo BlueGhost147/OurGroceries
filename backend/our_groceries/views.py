@@ -5,9 +5,8 @@ from our_groceries.serializers import ItemSerializer, ListSerializer, RoleSerial
 
 from our_groceries.models import Item, List, Role, UserProfile
 
-from rest_framework.permissions import BasePermission, IsAuthenticated, SAFE_METHODS, AllowAny
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.views import APIView
 from django.db.models import Q
 
 
@@ -17,7 +16,8 @@ def register(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         new_user = serializer.save()
-        UserProfile(user=new_user)
+        up = UserProfile(user=new_user)
+        up.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
