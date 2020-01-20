@@ -1,5 +1,7 @@
 <h1 mat-dialog-title>Edit Role</h1>
 <div mat-dialog-content>
+
+  <!--
   <mat-form-field>
     <mat-select placeholder="User" [(ngModel)]="this.data.role.user_name">
       <mat-option [value]="roleOption.id" *ngFor="let roleOption of roleOptions | keyvalue" >
@@ -11,7 +13,23 @@
 
 
   <mat-form-field>
-    <mat-select placeholder="Role Type" [(ngModel)]="this.data.role.role_types">
+    <input matInput type="text" placeholder="Username" [(ngModel)]="this.data.role.user_name">
+    <mat-hint align="end">User of the role</mat-hint>
+  </mat-form-field>-->
+
+  <mat-form-field>
+    <mat-select placeholder="Username" (change)="onUserChange(element, $event.value.id)" [(ngModel)]="this.data.role.user">
+      <mat-form-field>
+      <input matInput type="text" (keyup)="filterUserList($event.target.value)" class="select-filter">
+      </mat-form-field>
+        <mat-option *ngFor="let user of filteredUsers" [value]="user.id">
+        {{ user.username }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Role Type" [(ngModel)]="this.data.role.role_type">
       <mat-option [value]="roleOption" *ngFor="let roleOption of listService.role_types | keyvalue" >
         {{roleOption.value}}
       </mat-option>

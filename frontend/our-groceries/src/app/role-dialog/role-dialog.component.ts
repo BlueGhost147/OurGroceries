@@ -11,12 +11,15 @@ import {UserService} from "../services/user.service";
 })
 export class RoleDialogComponent implements OnInit {
 
-  roleOptions;
+  //roleOptions;
+  allUsers;
+  filteredUsers;
 
   constructor(public dialogRef: MatDialogRef<RoleDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData, public listService: ListService, public userService: UserService) {
-    this.roleOptions = data.roleOptions;
-    alert(JSON.stringify(data));
+    //this.roleOptions = data.roleOptions;
+    this.allUsers = data.userOptions;
+    this.filteredUsers = this.allUsers;
   }
 
   onNoClick(): void {
@@ -24,15 +27,30 @@ export class RoleDialogComponent implements OnInit {
   }
 
   saveRole() {
+    const newRole = {
+      "list": this.data.role.list,
+      "user":  this.data.role.user,
+      "role_type": this.data.role.role_type.key
+    };
     if (this.data.role.id === undefined) {
-      this.listService.createRole(this.data.role).subscribe(() => console.log("Created role"));
+      this.listService.createRole(newRole).subscribe(() => console.log("Created role"));
     } else {
-      this.listService.updateRole(this.data.role)
+      this.listService.updateRole(newRole)
         .subscribe(() => console.log("Updated role"));
     }
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
+  }
+
+
+  filterUserList(val) {
+    this.filteredUsers = this.allUsers.filter((user) => user.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
+  }
+
+  onUserChange(source, value)
+  {
+
   }
 
 }

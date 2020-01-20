@@ -1,13 +1,14 @@
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 
-from our_groceries.serializers import ItemSerializer, ListSerializer, RoleSerializer, UserSerializer
+from our_groceries.serializers import ItemSerializer, ListSerializer, RoleSerializer, UserSerializer, UserOptionsSerializer
 
 from our_groceries.models import Item, List, Role, UserProfile
 
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from django.db.models import Q
+from django.contrib.auth.models import User
 
 
 @api_view(['POST'])
@@ -40,6 +41,7 @@ def item_options(request):
 def item_create(request):
     serializer = ItemSerializer(data=request.data)
     if serializer.is_valid():
+        # ToDo Check for dupl.
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -126,8 +128,8 @@ def user_getAllItems(request):
 
 @api_view(['GET'])
 def user_list(request):
-    users = UserProfile.objects.all()
-    serializer = UserSerializer(users, many=True)
+    users = User.objects.all()
+    serializer = UserOptionsSerializer(users, many=True)
     return Response(serializer.data)
 
 
@@ -211,7 +213,7 @@ def list_update(request, list_id):
 @api_view(['GET'])
 def role_list(request):
     roles = Role.objects.all()
-    #role = Role.objects.filter(list__id=list_id)
+    # role = Role.objects.filter(list__id=list_id)
     serializer = RoleSerializer(roles, many=True)
     return Response(serializer.data)
 
@@ -225,6 +227,7 @@ def role_options(request, list_id):
 
 @api_view(['POST'])
 def role_create(request):
+    # User is given as user_name
     serializer = RoleSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()

@@ -7,9 +7,8 @@ import {ActivatedRoute} from "@angular/router";
 import {RoleDialogComponent} from "../role-dialog/role-dialog.component";
 
 export interface DialogData {
-  roleOptions;
   role;
-  user;
+  userOptions;
 }
 
 @Component({
@@ -20,7 +19,7 @@ export interface DialogData {
 export class RoleListComponent implements OnInit {
 
   role;
-  roleOptions;
+  userOptions;
 
   displayedColumns = ['user_name', 'role_type', 'id'];
 
@@ -39,6 +38,10 @@ export class RoleListComponent implements OnInit {
         this.role = response;
       }
     );
+
+    this.userService.getUserOptions().subscribe(result => {
+      this.userOptions = result;
+    })
   }
 
   deleteRole(role) {
@@ -49,7 +52,7 @@ export class RoleListComponent implements OnInit {
   openRoleDialog(role) {
     const dialogRef = this.dialog.open(RoleDialogComponent, {
       width: '250px',
-      data: {role}
+      data: {role: role,userOptions: this.userOptions}
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -4,6 +4,12 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 
 
+class UserOptionsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'username']
+
+
 # Source: https://stackoverflow.com/questions/49189484/how-to-mention-password-field-in-serializer/53553337
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
