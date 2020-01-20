@@ -61,4 +61,9 @@ export class ListService {
   deleteRole(role) {
     return this.http.delete('/api/role/' + role.id + '/delete');
   }
+
+  getLiatPermissionLevel(listId)
+  {
+    return this.http.get('/api/list/' + listId + '/permissions');
+  }
 }

@@ -7,7 +7,7 @@
       <span class="right">{{itemExpires}}</span>
     </mat-panel-description>
     <mat-panel-description *ngIf="listType === 2" class="right">
-      <mat-checkbox [(ngModel)]="itemChecked"
+      <mat-checkbox [(ngModel)]="itemChecked" [disabled]="permission_level < 2"
                     (click)="$event.stopPropagation();"
                     (keydown)="$event.stopPropagation()"
                     (change)="onCheckedChange($event)">
@@ -23,11 +23,11 @@
     <p *ngIf="dayExpries < 0">Expired {{dayExpries * (-1)}} days ago ({{itemExpires}})</p>
   </div>
   <mat-action-row>
-    <button mat-button (click)="editItem()" color="primary">
+    <button mat-button (click)="editItem()" color="primary" [disabled]="permission_level < 2">
       <mat-icon>settings_applications</mat-icon>
       Edit
     </button>
-    <button mat-button (click)="deleteItem()" color="primary">
+    <button mat-button (click)="deleteItem()" color="primary" [disabled]="permission_level < 2">
       <mat-icon>delete</mat-icon>
       Delete
     </button>

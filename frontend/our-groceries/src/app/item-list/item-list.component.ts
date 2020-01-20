@@ -28,6 +28,8 @@ export class ItemListComponent implements OnInit {
   @Input()
   version;
 
+  permission_level;
+
   @Output() refreshParent: EventEmitter<any> = new EventEmitter();
 
   constructor(private itemService: ItemService, private router: Router, public dialog: MatDialog, private listService: ListService) {
@@ -60,6 +62,11 @@ export class ItemListComponent implements OnInit {
 
   updateItems() {
     if (this.listId !== undefined) {
+
+      this.listService.getLiatPermissionLevel(this.listId).subscribe(result =>
+      {
+        this.permission_level = result["permission_level"];
+      });
 
       this.listService.setCurrentLists(this.listId, this.position).subscribe(r => console.log("Set list"));
 

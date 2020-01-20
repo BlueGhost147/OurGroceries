@@ -22,19 +22,19 @@
          class="" (cdkDropListDropped)="dropItem($event)">
       <div class="" *ngFor="let item of items" cdkDrag [id]="item.id">
         <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id" [itemPriority]="item.priority" [listType]="item.listType" [itemExpires]="item.expires" [itemChecked]="item.checked"
-                         [listId]="this.listId" (refreshParent)="updatedList($event)"></app-single-item>
+                         [listId]="this.listId" [permission_level]="permission_level" (refreshParent)="updatedList($event)"></app-single-item>
       </div>
       <div class="buffer-div"></div>
     </div>
   </div>
 
   <div *ngIf="listId!==undefined">
-    <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="editList()">
+    <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="editList()" [disabled]="permission_level < 2">
       <mat-icon aria-hidden="false" aria-label="settings_applications">settings_applications</mat-icon>
       Edit list
     </button>
 
-    <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="newItem()">
+    <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="newItem()" [disabled]="permission_level < 2">
       <mat-icon aria-hidden="false" aria-label="add">add</mat-icon>
       New item
     </button>

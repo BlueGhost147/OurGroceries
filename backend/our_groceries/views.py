@@ -1,9 +1,12 @@
 from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 
-from our_groceries.serializers import ItemSerializer, ListSerializer, RoleSerializer, UserSerializer, UserOptionsSerializer
+from our_groceries.serializers import ItemSerializer, ListSerializer, RoleSerializer, UserSerializer, \
+    UserOptionsSerializer
 
 from our_groceries.models import Item, List, Role, UserProfile
+
+from our_groceries.helper import permission_check_list, permission_check_list_by_id
 
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -14,6 +17,10 @@ from django.contrib.auth.models import User
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register(request):
+    """Register a new user
+    Security: none
+    """
+
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         new_user = serializer.save()
@@ -24,22 +31,28 @@ def register(request):
 
 
 @api_view(['GET'])
-def item_list(request):
-    items = Item.objects.all()
-    serializer = ItemSerializer(items, many=True)
-    return Response(serializer.data)
-
-
-@api_view(['GET'])
-def item_options(request):
-    items = Item.objects.all()
-    serializer = ItemSerializer(items, many=True)
-    return Response(serializer.data)
+def list_permissions(request, list_id):
+    user = request.user
+    return Response({"permission_level": permission_check_list_by_id(user, list_id)}, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
 def item_create(request):
+    """Create a new Item
+    Security: User needs to be logged in
+    """
     serializer = ItemSerializer(data=request.data)
+
+    list_id = serializer.initial_data['list']
+
+    permission_level = permission_check_list_by_id(request.user, list_id)
+
+    if permission_level < 2:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+    elif permission_level == 2:
+        # Items are not
+        serializer.initial_data['accepted'] = False
+
     if serializer.is_valid():
         # ToDo Check for dupl.
         serializer.save()
@@ -52,6 +65,12 @@ def item_checked(request, item_id):
     checked = request.data['checked']
     try:
         item = Item.objects.get(id=item_id)
+
+        permission_level = permission_check_list(request.user, item.list)
+
+        if permission_level < 2:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         item.checked = checked
         item.save()
         return Response(status=status.HTTP_202_ACCEPTED)

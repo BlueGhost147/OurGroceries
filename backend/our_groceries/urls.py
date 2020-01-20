@@ -33,8 +33,8 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
-    path('item/list', views.item_list),
-    path('item/options', views.item_options),
+    # path('item/list', views.item_list),
+    # path('item/options', views.item_options),
     path('item/create', views.item_create),
     path('item/<int:item_id>/get', views.item_update),
     path('item/<int:item_id>/update', views.item_update),
@@ -52,6 +52,7 @@ urlpatterns = [
     path('list/<int:list_id>/get', views.list_update),
     path('list/<int:list_id>/update', views.list_update),
     path('list/<int:list_id>/delete', views.list_update),
+    path('list/<int:list_id>/permissions', views.list_permissions),
 
     path('list/<int:list_id>/set/<position>/', views.list_setcurrent),
 

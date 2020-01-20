@@ -54,6 +54,8 @@ export class ItemService {
   {
     return this.http.put('/api/item/' +itemId+ '/checked', {'checked': checked});
   }
+
+
 }
 
 

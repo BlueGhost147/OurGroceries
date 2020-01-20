@@ -27,6 +27,9 @@ export class SingleItemComponent implements OnInit {
   @Input()
   itemExpires;
 
+  @Input()
+  permission_level;
+
   dayExpries;
 
   @Output() refreshParent: EventEmitter<any> = new EventEmitter();
