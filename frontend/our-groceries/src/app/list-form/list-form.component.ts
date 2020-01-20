@@ -12,7 +12,6 @@ import {ListService} from "../services/list.service";
 export class ListFormComponent implements OnInit {
 
   listFormGroup;
-  role_id;
   list_id;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, public listService: ListService,
@@ -28,9 +27,9 @@ export class ListFormComponent implements OnInit {
       list_type: [null, Validators.required],
     });
 
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.http.get('/api/list/' + id + '/get')
+    this.list_id = this.route.snapshot.paramMap.get('id');
+    if (this.list_id) {
+      this.http.get('/api/list/' + this.list_id + '/get')
         .subscribe((response) => {
           this.listFormGroup.patchValue(response);
         });

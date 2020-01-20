@@ -19,38 +19,26 @@ export interface DialogData {
 })
 export class RoleListComponent implements OnInit {
 
-  role: any[];
+  role;
   roleOptions;
 
   displayedColumns = ['user_name', 'role_type', 'id'];
 
-  @Input() role_id;
   @Input() list_id;
-  @Input() listOptions;
 
+  //@Input() listOptions;
 
 
   constructor(private http: HttpClient, private listService: ListService, public userService: UserService,
-              public dialog: MatDialog, private route: ActivatedRoute) { }
+              public dialog: MatDialog, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
 
-    /*const data = this.route.snapshot.data;
-    this.roleOptions = data.roleOptions;
-
-    this.listService.getRole(this.list_id)
-      .subscribe((response: any[]) => {
+    this.listService.getRole(this.list_id).subscribe(response => {
         this.role = response;
-      });*/
-
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.http.get('/api/role/options/' + id)
-        .subscribe((response) => {
-          this.listService.getRole(response);
-        });
-    }
-
+      }
+    );
   }
 
   deleteRole(role) {
@@ -70,7 +58,8 @@ export class RoleListComponent implements OnInit {
   }
 
   createRoleDialog() {
-    const newRole = {product: this.role_id};
+    // Opens a dialog to create a new role -> list_id is a constant
+    const newRole = {list_id: this.list_id};
     this.openRoleDialog(newRole);
   }
 

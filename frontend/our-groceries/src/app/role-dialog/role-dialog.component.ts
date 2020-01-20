@@ -16,6 +16,7 @@ export class RoleDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<RoleDialogComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData, public listService: ListService, public userService: UserService) {
     this.roleOptions = data.roleOptions;
+    alert(JSON.stringify(data));
   }
 
   onNoClick(): void {
