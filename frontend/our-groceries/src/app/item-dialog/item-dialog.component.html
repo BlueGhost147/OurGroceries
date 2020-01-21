@@ -22,7 +22,7 @@
   </mat-form-field>
 
   <mat-form-field [style.width.px]="245" *ngIf="this.data.listType === 2">
-    <mat-select placeholder = "Priority" [(ngModel)] = "this.data.itemPriority">
+    <mat-select placeholder="Priority" [(ngModel)]="this.data.itemPriority">
       <mat-option *ngFor="let prio of itemService.priorities | keyvalue" [value]="toInt(prio.key)">
         {{prio.value}}
       </mat-option>
@@ -31,7 +31,9 @@
   </mat-form-field>
 
   <div style="width: 245px;" *ngIf="this.data.listType === 2">
-  <mat-checkbox [(ngModel)] = "this.data.itemChecked">Checked</mat-checkbox>
+    <mat-checkbox [(ngModel)]="this.data.itemChecked">Checked</mat-checkbox>
+    <br>
+    <mat-checkbox *ngIf="this.data.itemAccepted === false" [(ngModel)]="this.data.itemAccepted" [disabled]="this.data.permission_level < 3">Accepted</mat-checkbox>
   </div>
 
 </div>

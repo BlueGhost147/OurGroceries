@@ -30,7 +30,8 @@ export class RoleDialogComponent implements OnInit {
     const newRole = {
       "list": this.data.role.list,
       "user":  this.data.role.user,
-      "role_type": this.data.role.role_type.key
+      "role_type": this.data.role.role_type.key,
+      "id": this.data.role.id
     };
     if (this.data.role.id === undefined) {
       this.listService.createRole(newRole).subscribe(() => console.log("Created role"));

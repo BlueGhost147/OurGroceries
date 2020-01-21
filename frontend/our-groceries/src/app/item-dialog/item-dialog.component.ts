@@ -13,6 +13,8 @@ export interface DialogData {
   itemExpires;
   itemList;
   updateevent;
+  itemAccepted;
+  permission_level;
 }
 
 @Component({
@@ -41,6 +43,7 @@ export class ItemDialogComponent implements OnInit {
         checked: this.data.itemChecked === undefined ? false : this.data.itemChecked,
         list: this.data.itemList,
         expires: this.datepipe.transform(this.data.itemExpires, 'yyyy-MM-dd'),
+        accepted: this.data.itemAccepted
       })
         .subscribe(() => {
           if(this.data.updateevent !== undefined){
@@ -54,6 +57,7 @@ export class ItemDialogComponent implements OnInit {
         priority: this.data.itemPriority,
         checked: this.data.itemChecked === undefined ? false : this.data.itemChecked,
         list: this.data.itemList,
+        accepted: this.data.itemAccepted,
         expires: this.datepipe.transform(this.data.itemExpires, 'yyyy-MM-dd'),
       })
         .subscribe(() => {
