@@ -9,7 +9,6 @@ import {ItemService} from "../services/item.service";
 })
 export class NotificationListComponent implements OnInit {
 
-  notes: NotificationHelperClass[] = [];
   expireItems;
 
 
@@ -20,12 +19,6 @@ export class NotificationListComponent implements OnInit {
     this.checkExpireItems();
   }
 
-  /*
-  public getCurrentNotifications() {
-    this.checkExpireItems();
-    // FIXME: Value is always 0
-    return this.notes.length;
-  }*/
 
   checkExpireItems() {
     this.itemService.getExpire().subscribe((response: any[]) => {
@@ -34,16 +27,6 @@ export class NotificationListComponent implements OnInit {
         item.expiresIn = this.calculateExpireDateDays(item.expires);
         return item;
       });
-      /*response.forEach((itm) => {
-          if (itm.expires != null) {
-            let temp = this.calculateExpireDateDays(itm.expires);
-            // Add all items, that are about to expire to list
-            if (temp <= 4) {
-              this.notes.push(new NotificationHelperClass(temp, itm.name));
-            }
-          }
-        }
-      );*/
     });
   }
 
@@ -52,14 +35,4 @@ export class NotificationListComponent implements OnInit {
     return (Math.floor((<any>new Date() - <any>new Date(dt)) / (1000 * 60 * 60 * 24))) * (-1);
   }
 
-}
-
-class NotificationHelperClass {
-  constructor(num: number, text: String) {
-    this.num = num;
-    this.text = text;
-  }
-
-  public num;
-  public text;
 }
