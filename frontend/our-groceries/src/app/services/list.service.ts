@@ -26,23 +26,17 @@ export class ListService {
   }
 
   getListsByUserId(id) {
-  if(id !== undefined)
-    return this.http.get('/api/list/list');
+    if (id !== undefined)
+      return this.http.get('/api/list/list');
   }
 
-  getCurrentLists(){
+  getCurrentLists() {
     return this.http.get('/api/user/getlists/');
   }
 
-  setCurrentLists(listId, position){
-    return this.http.get('/api/list/'+listId+'/set/'+position+'/');
+  setCurrentLists(listId, position) {
+    return this.http.get('/api/list/' + listId + '/set/' + position + '/');
   }
-
-  //Maybe move this to another service
-  getAllItems() {
-    return this.http.get('/api/user/getAllItems/');
-  }
-
 
 
   getRole(id) {
@@ -62,8 +56,7 @@ export class ListService {
     return this.http.delete('/api/role/' + role.id + '/delete');
   }
 
-  getLiatPermissionLevel(listId)
-  {
+  getLiatPermissionLevel(listId) {
     return this.http.get('/api/list/' + listId + '/permissions');
   }
 }

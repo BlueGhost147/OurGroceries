@@ -6,10 +6,8 @@
       <mat-icon aria-hidden="false" aria-label="add">add</mat-icon>
       New list
     </button>
-      <button class="logout-comp newList-button" mat-button type="submit" color="primary"
-              matBadge="{{currentNotifications}}" matBadgePosition="before" matBadgeColor="accent" (click)="showNotifications()">
-        Notifications
-      </button>
+
+        <app-notification-list></app-notification-list>
 
   </div>
   <div class="home-grid" (swipe)="onListSwipe($event)">

@@ -13,6 +13,8 @@ from rest_framework.response import Response
 from django.db.models import Q
 from django.contrib.auth.models import User
 
+from datetime import date, timedelta
+
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -344,8 +346,9 @@ def role_update(request, role_id):
 
 
 @api_view(['GET'])
-def user_getAllItems(request):
-    user_id = request.user.id;
-    items = Item.objects.filter(list__owner=user_id)
+def item_expire(request):
+    user_id = request.user.id
+    today4 = date.today() + +timedelta(days=4)
+    items = Item.objects.filter(list__owner=user_id, expires__isnull=False, expires__lt=today4)
     serializer = ItemSerializer(items, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)

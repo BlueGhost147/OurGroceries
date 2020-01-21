@@ -21,7 +21,7 @@ const routes: Routes = [
     }
   },
   {path: 'login', component: LockScreenComponent},
-  {path: 'notification-list', component: NotificationListComponent, canActivate: [AuthGuard]},
+  //{path: 'notification-list', component: NotificationListComponent, canActivate: [AuthGuard]},
   {path: 'list-form', component: ListFormComponent, canActivate: [AuthGuard]},
   {path: 'list-form/:id', component: ListFormComponent, canActivate: [AuthGuard]},
 ];

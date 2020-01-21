@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ListService} from '../services/list.service';
+import {ItemService} from "../services/item.service";
 
 @Component({
   selector: 'app-notification-list',
@@ -9,24 +10,31 @@ import {ListService} from '../services/list.service';
 export class NotificationListComponent implements OnInit {
 
   notes: NotificationHelperClass[] = [];
+  expireItems;
 
 
-  constructor(public listService: ListService) {
+  constructor(public itemService: ItemService) {
   }
 
   ngOnInit() {
     this.checkExpireItems();
   }
 
+  /*
   public getCurrentNotifications() {
     this.checkExpireItems();
     // FIXME: Value is always 0
     return this.notes.length;
-  }
+  }*/
 
   checkExpireItems() {
-    this.listService.getAllItems().subscribe((response: any[]) => {
-      response.forEach((itm) => {
+    this.itemService.getExpire().subscribe((response: any[]) => {
+      this.expireItems = response;
+      this.expireItems = this.expireItems.map(item => {
+        item.expiresIn = this.calculateExpireDateDays(item.expires);
+        return item;
+      });
+      /*response.forEach((itm) => {
           if (itm.expires != null) {
             let temp = this.calculateExpireDateDays(itm.expires);
             // Add all items, that are about to expire to list
@@ -35,7 +43,7 @@ export class NotificationListComponent implements OnInit {
             }
           }
         }
-      );
+      );*/
     });
   }
 

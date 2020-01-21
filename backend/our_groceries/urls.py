@@ -56,7 +56,7 @@ urlpatterns = [
 
     path('list/<int:list_id>/set/<position>/', views.list_setcurrent),
 
-    path('user/getAllItems/', views.user_getAllItems),
+    path('item/expire/', views.item_expire),
     path('role/options/<int:list_id>', views.role_options),
     path('role/create', views.role_create),
     path('role/<int:role_id>/get', views.role_update),

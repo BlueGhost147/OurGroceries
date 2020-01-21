@@ -1,6 +1,11 @@
-<div>
-  <p *ngFor="let item of notes">
-    {{item.text}} expires in {{item.num}} days
-  </p>
+<button mat-button [matMenuTriggerFor]="menu" class="logout-comp newList-button" mat-button type="submit" color="primary"
+        matBadge="{{expireItems.length}}" matBadgePosition="before" matBadgeColor="accent"><mat-icon>notification_important</mat-icon></button>
+<mat-menu #menu="matMenu">
+ <!-- <button mat-menu-item *ngFor="let item of expireItems">{{item.name}} expires on {{item.expires}}</button>-->
 
-</div>
+  <div *ngFor="let item of expireItems">
+    <button mat-menu-item *ngIf="item.expiresIn > 0">{{item.name}} expires in {{item.expiresIn}} days</button>
+    <button mat-menu-item *ngIf="item.expiresIn == 0">{{item.name}} expires today</button>
+    <button mat-menu-item *ngIf="item.expiresIn < 0">{{item.name}} expired {{item.expiresIn * (-1)}} days ago</button>
+  </div>
+</mat-menu>
