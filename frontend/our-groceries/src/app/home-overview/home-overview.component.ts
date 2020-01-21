@@ -35,7 +35,7 @@ export class HomeOverviewComponent implements OnInit {
         this.listId2 = response[1];
       });
 
-    this.currentNotifications = this.notification.getCurrentNotifications()
+    this.currentNotifications = this.notification.getCurrentNotifications();
   }
 
   showNotifications() {
@@ -59,7 +59,7 @@ export class HomeOverviewComponent implements OnInit {
     this.version1++;
     this.version2++;
 
-    this.currentNotifications = this.notification.getCurrentNotifications()
+    this.currentNotifications = this.notification.getCurrentNotifications();
   }
 
 }

@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import {ListService} from "../services/list.service";
+import {Component, OnInit} from '@angular/core';
+import {ListService} from '../services/list.service';
 
 @Component({
   selector: 'app-notification-list',
@@ -8,33 +8,34 @@ import {ListService} from "../services/list.service";
 })
 export class NotificationListComponent implements OnInit {
 
-  notes : NotificationHelperClass[] = [];
+  notes: NotificationHelperClass[] = [];
 
 
-  constructor(public listService: ListService) { }
+  constructor(public listService: ListService) {
+  }
 
   ngOnInit() {
     this.checkExpireItems();
   }
 
-  public getCurrentNotifications(){
+  public getCurrentNotifications() {
     this.checkExpireItems();
-    //FIXME: Value is always 0
+    // FIXME: Value is always 0
     return this.notes.length;
   }
 
-    checkExpireItems() {
+  checkExpireItems() {
     this.listService.getAllItems().subscribe((response: any[]) => {
       response.forEach((itm) => {
-        if(itm.expires != null) {
-          let temp = this.calculateExpireDateDays(itm.expires);
-          //Add all items, that are about to expire to list
-          if (temp <= 4) {
+          if (itm.expires != null) {
+            let temp = this.calculateExpireDateDays(itm.expires);
+            // Add all items, that are about to expire to list
+            if (temp <= 4) {
               this.notes.push(new NotificationHelperClass(temp, itm.name));
+            }
           }
-        }}
-
-      )
+        }
+      );
     });
   }
 
@@ -46,10 +47,11 @@ export class NotificationListComponent implements OnInit {
 }
 
 class NotificationHelperClass {
-  constructor(num:number, text:String) {
+  constructor(num: number, text: String) {
     this.num = num;
     this.text = text;
   }
+
   public num;
   public text;
 }
