@@ -6,6 +6,7 @@ import {AuthGuard} from './auth.guard';
 import {LockScreenComponent} from "./lock-screen/lock-screen.component";
 import {ListOptionsResolver} from "./resolver/list-options-resolver";
 import {ListFormComponent} from "./list-form/list-form.component";
+import {NotificationListComponent} from "./notification-list/notification-list.component";
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
     }
   },
   {path: 'login', component: LockScreenComponent},
+  {path: 'notification-list', component: NotificationListComponent, canActivate: [AuthGuard]},
   {path: 'list-form', component: ListFormComponent, canActivate: [AuthGuard]},
   {path: 'list-form/:id', component: ListFormComponent, canActivate: [AuthGuard]},
 ];

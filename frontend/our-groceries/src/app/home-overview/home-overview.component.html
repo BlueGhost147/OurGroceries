@@ -6,14 +6,10 @@
       <mat-icon aria-hidden="false" aria-label="add">add</mat-icon>
       New list
     </button>
-
-    <div class="expireWarning" *ngIf="existExpireItems">
-      <!-- List items that are about to expire -->
-      <p *ngFor="let item of expireItems | keyvalue">
-        {{item.key}} expires in {{item.value}} days
-      </p>
-
-    </div>
+      <button class="logout-comp newList-button" mat-button type="submit" color="primary"
+              matBadge="{{getNotificationCount()}}" matBadgePosition="before" matBadgeColor="accent" (click)="showNotifications()">
+        Notifications
+      </button>
 
   </div>
   <div class="home-grid" (swipe)="onListSwipe($event)">

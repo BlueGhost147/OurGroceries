@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, NavigationEnd, Router} from "@angular/router";
 import {ListService} from "../services/list.service";
+import {NotificationListComponent} from "../notification-list/notification-list.component";
 
 @Component({
   selector: 'app-home-overview',
   templateUrl: './home-overview.component.html',
-  styleUrls: ['./home-overview.component.scss']
+  styleUrls: ['./home-overview.component.scss'],
+  providers: [NotificationListComponent]
 })
 export class HomeOverviewComponent implements OnInit {
 
@@ -16,10 +18,10 @@ export class HomeOverviewComponent implements OnInit {
   version1 = 0;
   version2 = 0;
 
-  expireItems = {};
-  existExpireItems = false;
+  currentNotifications;
 
-  constructor(private route: ActivatedRoute, private router: Router, private listService: ListService) {
+
+  constructor(private route: ActivatedRoute, private router: Router, private listService: ListService, private notification: NotificationListComponent) {
   }
 
   ngOnInit() {
@@ -32,30 +34,21 @@ export class HomeOverviewComponent implements OnInit {
         this.listId1 = response[0];
         this.listId2 = response[1];
       });
-    this.checkExpireItems();
+
+    this.currentNotifications = this.notification.getCurrentNotifications()
   }
 
-  checkExpireItems() {
-    this.listService.getAllItems().subscribe((response: any[]) => {
-      response.forEach((itm) => {
-        let temp = this.calculateExpireDateDays(itm.expires);
-        //Add all items, that are about to expire to list
-        if (temp <= 4) {
-          this.expireItems[itm.name] = temp;
-          this.existExpireItems = true;
-        }
-      })
-
-    });
-
+  showNotifications() {
+    this.router.navigate(['/notification-list']);
   }
+
+  getNotificationCount() {
+    return this.currentNotifications;
+  }
+
 
   onListSwipe(event) {
     // alert("swipe");
-  }
-
-  calculateExpireDateDays(dt) {
-    return (Math.floor((<any>new Date() - <any>new Date(dt)) / (1000 * 60 * 60 * 24))) * (-1);
   }
 
   newList() {
@@ -65,6 +58,8 @@ export class HomeOverviewComponent implements OnInit {
   updatedLists($event) {
     this.version1++;
     this.version2++;
+
+    this.currentNotifications = this.notification.getCurrentNotifications()
   }
 
 }

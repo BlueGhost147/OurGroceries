@@ -38,6 +38,8 @@ import {DatePipe} from '@angular/common';
 import {HttperrorInterceptor} from './httperror.interceptor';
 import { RoleDialogComponent } from './role-dialog/role-dialog.component';
 import { RoleListComponent } from './role-list/role-list.component';
+import {MatBadgeModule} from "@angular/material/badge";
+import { NotificationListComponent } from './notification-list/notification-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -58,6 +60,7 @@ export function tokenGetter() {
     ItemDialogComponent,
     RoleDialogComponent,
     RoleListComponent,
+    NotificationListComponent,
   ],
   imports: [
     BrowserModule,
@@ -94,6 +97,7 @@ export function tokenGetter() {
     MatExpansionModule,
     MatIconModule,
     DragDropModule,
+    MatBadgeModule,
   ],
   providers: [DatePipe, {
     provide: HTTP_INTERCEPTORS,
