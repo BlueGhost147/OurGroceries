@@ -29,7 +29,7 @@
   </div>
 
   <div *ngIf="listId!==undefined">
-    <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="editList()" [disabled]="permission_level < 2">
+    <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="editList()" [disabled]="permission_level < 4">
       <mat-icon aria-hidden="false" aria-label="settings_applications">settings_applications</mat-icon>
       Edit list
     </button>

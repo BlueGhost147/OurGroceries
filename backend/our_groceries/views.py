@@ -82,7 +82,19 @@ def item_checked(request, item_id):
 def move_item(request, item_id, list_id):
     try:
         item = Item.objects.get(id=item_id)
-        item.list = List.objects.get(id=list_id)
+        new_list = List.objects.get(id=list_id)
+
+        permission_level_old_list = permission_check_list(request.user, item.list)
+        permission_level_new_list = permission_check_list(request.user, new_list)
+
+        if permission_level_new_list < 2 & permission_level_old_list < 2:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
+        # If the user only has app_req permission
+        if permission_level_new_list == 2:
+            item.accepted = False
+
+        item.list = new_list
         item.save()
         return Response(status=status.HTTP_202_ACCEPTED)
     except Item.DoesNotExist:
@@ -93,6 +105,11 @@ def move_item(request, item_id, list_id):
 def item_by_list(request, list_id):
     try:
         item = Item.objects.filter(list__id=list_id)
+        permission_level = permission_check_list_by_id(request.user, list_id)
+
+        if permission_level < 1:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
     except Item.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -106,6 +123,12 @@ def list_setcurrent(request, list_id, position):
     try:
         user_profile = UserProfile.objects.get(user__id=user_id)
         list = List.objects.get(id=list_id)
+
+        permission_level = permission_check_list(request.user, list)
+
+        if permission_level < 1:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         if position == '1':
             user_profile.list1 = list
             user_profile.save()
@@ -138,15 +161,8 @@ def user_getcurrentlist(request):
 
 
 @api_view(['GET'])
-def user_getAllItems(request):
-    user_id = request.user.id;
-    items = Item.objects.filter(list__owner=user_id)
-    serializer = ItemSerializer(items, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-@api_view(['GET'])
 def user_list(request):
+    """Get all user options for permissions in frontend (name and id only)"""
     users = User.objects.all()
     serializer = UserOptionsSerializer(users, many=True)
     return Response(serializer.data)
@@ -160,18 +176,36 @@ def item_update(request, item_id):
     # Get the object to modify
     try:
         item = Item.objects.get(id=item_id)
+        permission_level = permission_check_list(request.user, item.list)
     except Item.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
+        # Check read permission
+        if permission_level < 1:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         serializer = ItemSerializer(item)
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'PUT':
+        # Check write permission
+        if permission_level < 2:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         serializer = ItemSerializer(item, data=request.data)
+        # Check is approval req.
+        if permission_level == 2:
+            serializer.initial_data['accepted'] = False
+
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+
     elif request.method == 'DELETE':
+        # Check write permission for delete
+        if permission_level < 2:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         item.delete()
         return Response(status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -182,16 +216,10 @@ def list_list(request):
     if request.user.is_superuser:
         lists = List.objects.all()
     else:
+        # If a role exits, it needs to be at least read permission
         lists = List.objects.filter(Q(owner=request.user.id) | Q(roles__user=request.user.id))
     serializer = ListSerializer(lists, many=True)
     return Response(serializer.data)
-
-
-# @api_view(['GET'])
-# def list_options(request):
-#   lists = List.objects.all()
-#  serializer = ListSerializer(lists, many=True)
-# return Response(serializer.data)
 
 
 @api_view(['POST'])
@@ -212,33 +240,54 @@ def list_update(request, list_id):
     # Get the object to modify
     try:
         list = List.objects.get(id=list_id)
+        permission_level = permission_check_list(request.user, list)
     except List.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
+        # Check read permission
+        if permission_level < 1:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         serializer = ListSerializer(list)
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'PUT':
+        # Check full control
+        if permission_level < 4:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         serializer = ListSerializer(list, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     elif request.method == 'DELETE':
+        # Check full control
+        if permission_level < 4:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         list.delete()
         return Response(status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['GET'])
-def role_list(request):
-    roles = Role.objects.all()
-    # role = Role.objects.filter(list__id=list_id)
-    serializer = RoleSerializer(roles, many=True)
-    return Response(serializer.data)
+#@api_view(['GET'])
+#def role_list(request):
+#    roles = Role.objects.all()
+#    # role = Role.objects.filter(list__id=list_id)
+#    serializer = RoleSerializer(roles, many=True)
+#    return Response(serializer.data)
 
 
 @api_view(['GET'])
 def role_options(request, list_id):
+    """Get all the roles for a list"""
+
+    permission_level = permission_check_list_by_id(request.user, list_id)
+
+    # Only the owner/co-owner can handle roles
+    if permission_level < 4:
+        return Response(status=status.HTTP_403_FORBIDDEN)
+
     roles = Role.objects.filter(list__id=list_id)
     serializer = RoleSerializer(roles, many=True)
     return Response(serializer.data)
@@ -246,9 +295,18 @@ def role_options(request, list_id):
 
 @api_view(['POST'])
 def role_create(request):
+
     # User is given as user_name
     serializer = RoleSerializer(data=request.data)
+
     if serializer.is_valid():
+        list_id = serializer.initial_data['list']
+        permission_level = permission_check_list_by_id(request.user, list_id)
+
+        # Only the owner/co-owner can handle roles
+        if permission_level < 4:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
         serializer.save()
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -262,6 +320,12 @@ def role_update(request, role_id):
     # Get the object to modify
     try:
         role = Role.objects.get(id=role_id)
+        permission_level = permission_check_list(request.user, role.list)
+
+        # Only the owner/co-owner can handle roles
+        if permission_level < 4:
+            return Response(status=status.HTTP_403_FORBIDDEN)
+
     except Role.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -277,3 +341,11 @@ def role_update(request, role_id):
         role.delete()
         return Response(status=status.HTTP_200_OK)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+def user_getAllItems(request):
+    user_id = request.user.id;
+    items = Item.objects.filter(list__owner=user_id)
+    serializer = ItemSerializer(items, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)
