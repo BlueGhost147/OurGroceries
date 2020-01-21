@@ -18,9 +18,9 @@
   </div>-->
 
   <div class="item-list overflow-buffer">
-    <div cdkDropList #ditemList="cdkDropList" [id]="listId"
+    <div cdkDropList cdkDropListSortingDisabled #ditemList="cdkDropList" [id]="listId"
          class="" (cdkDropListDropped)="dropItem($event)">
-      <div class="" *ngFor="let item of items" cdkDrag [id]="item.id">
+      <div class="" *ngFor="let item of items" cdkDrag [cdkDragDisabled]="permission_level < 2" [id]="item.id">
         <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id" [itemPriority]="item.priority" [listType]="item.listType" [itemExpires]="item.expires" [itemChecked]="item.checked"
                          [listId]="this.listId" [permission_level]="permission_level" (refreshParent)="updatedList($event)"></app-single-item>
       </div>
