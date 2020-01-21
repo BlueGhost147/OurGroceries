@@ -30,6 +30,10 @@ export class ListService {
       return this.http.get('/api/list/list');
   }
 
+  deleteListById(id) {
+    return this.http.delete('/api/list/' + id + '/delete');
+  }
+
   getCurrentLists() {
     return this.http.get('/api/user/getlists/');
   }

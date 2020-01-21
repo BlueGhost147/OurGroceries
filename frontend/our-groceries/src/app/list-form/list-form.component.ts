@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {ListService} from "../services/list.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-list-form',
@@ -15,7 +16,7 @@ export class ListFormComponent implements OnInit {
   list_id;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, public listService: ListService,
-              private router: Router) { }
+              private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
 
@@ -35,6 +36,18 @@ export class ListFormComponent implements OnInit {
         });
     }
 
+  }
+
+  deleteList() {
+    const list = this.listFormGroup.value;
+    if(list.id) {
+      this.listService.deleteListById(list.id).subscribe(() => {
+        this.router.navigate(['/home']);
+        this.snackBar.open('List deleted', null, {
+          duration: 2000,
+        });
+      });
+    }
   }
 
   createList() {

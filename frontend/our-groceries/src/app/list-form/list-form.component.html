@@ -42,6 +42,9 @@
           <span *ngIf="!listFormGroup.controls.id.value">Create</span>
           <span *ngIf="listFormGroup.controls.id.value">Update</span>
         </button>
+        <button mat-raised-button color="primary" (click)="deleteList()">
+          <span>Delete</span>
+        </button>
       </mat-card-actions>
     </form>
 
