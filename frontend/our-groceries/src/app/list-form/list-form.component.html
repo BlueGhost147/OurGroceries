@@ -39,10 +39,12 @@
       <br/>
       <mat-card-actions align="center">
         <button mat-raised-button color="primary" [disabled]="!listFormGroup.valid" (click)="createList()">
+          <mat-icon aria-hidden="false" aria-label="done">done</mat-icon>
           <span *ngIf="!listFormGroup.controls.id.value">Create</span>
           <span *ngIf="listFormGroup.controls.id.value">Update</span>
         </button>
-        <button mat-raised-button color="primary" (click)="deleteList()">
+        <button mat-raised-button (click)="deleteList()" *ngIf="list_id">
+          <mat-icon aria-hidden="false" aria-label="delete_forever">delete_forever</mat-icon>
           <span>Delete</span>
         </button>
       </mat-card-actions>

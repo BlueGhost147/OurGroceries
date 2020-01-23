@@ -63,9 +63,10 @@ export class ItemListComponent implements OnInit {
   updateItems() {
     if (this.listId !== undefined) {
 
-      this.listService.getLiatPermissionLevel(this.listId).subscribe(result =>
+      this.listService.getListPermissionLevel(this.listId).subscribe(result =>
       {
         this.permission_level = result["permission_level"];
+        this.listTyp = result["list_type"];
       });
 
       this.listService.setCurrentLists(this.listId, this.position).subscribe(r => console.log("Set list"));
@@ -73,9 +74,6 @@ export class ItemListComponent implements OnInit {
       this.itemService.getItemsFromList(this.listId)
         .subscribe((response: any[]) => {
           this.items = this.sortItemsByPrio(response);
-          if (this.items && this.items.length > 0) {
-            this.listTyp = this.items[0].listType;
-          }
         });
     }
   }
@@ -90,7 +88,7 @@ export class ItemListComponent implements OnInit {
 
   openItemDialog() {
     const dialogRef = this.dialog.open(ItemDialogComponent, {
-      width: '300px',
+      width: '315px',
       data: {
         itemName: '',
         itemCount: 1,

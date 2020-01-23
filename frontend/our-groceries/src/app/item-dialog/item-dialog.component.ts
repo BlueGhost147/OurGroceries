@@ -28,42 +28,47 @@ export class ItemDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<ItemDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private itemService: ItemService, public datepipe: DatePipe
   ) {
-}
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
 
   saveItem() {
-    if (this.data.itemId === undefined) {
-      this.itemService.createItem({
-        name: this.data.itemName,
-        amount: this.data.itemCount,
-        priority: this.data.itemPriority,
-        checked: this.data.itemChecked === undefined ? false : this.data.itemChecked,
-        list: this.data.itemList,
-        expires: this.datepipe.transform(this.data.itemExpires, 'yyyy-MM-dd'),
-        accepted: this.data.itemAccepted
-      })
-        .subscribe(() => {
-          if(this.data.updateevent !== undefined){
-            this.data.updateevent.emit(this.data.itemId)}
-        });
-    } else {
-      this.itemService.updateItem({
-        id: this.data.itemId,
-        name: this.data.itemName,
-        amount: this.data.itemCount,
-        priority: this.data.itemPriority,
-        checked: this.data.itemChecked === undefined ? false : this.data.itemChecked,
-        list: this.data.itemList,
-        accepted: this.data.itemAccepted,
-        expires: this.datepipe.transform(this.data.itemExpires, 'yyyy-MM-dd'),
-      })
-        .subscribe(() => {
-          if(this.data.updateevent !== undefined){
-          this.data.updateevent.emit(this.data.itemId)}
-        });
+    if (this.data.itemCount > 0 && this.data.itemName && this.data.itemName !== "") {
+
+      if (this.data.itemId === undefined) {
+        this.itemService.createItem({
+          name: this.data.itemName,
+          amount: this.data.itemCount,
+          priority: this.data.itemPriority,
+          checked: this.data.itemChecked === undefined ? false : this.data.itemChecked,
+          list: this.data.itemList,
+          expires: this.datepipe.transform(this.data.itemExpires, 'yyyy-MM-dd'),
+          accepted: this.data.itemAccepted
+        })
+          .subscribe(() => {
+            if (this.data.updateevent !== undefined) {
+              this.data.updateevent.emit(this.data.itemId)
+            }
+          });
+      } else {
+        this.itemService.updateItem({
+          id: this.data.itemId,
+          name: this.data.itemName,
+          amount: this.data.itemCount,
+          priority: this.data.itemPriority,
+          checked: this.data.itemChecked === undefined ? false : this.data.itemChecked,
+          list: this.data.itemList,
+          accepted: this.data.itemAccepted,
+          expires: this.datepipe.transform(this.data.itemExpires, 'yyyy-MM-dd'),
+        })
+          .subscribe(() => {
+            if (this.data.updateevent !== undefined) {
+              this.data.updateevent.emit(this.data.itemId)
+            }
+          });
+      }
     }
   }
 
@@ -71,6 +76,7 @@ export class ItemDialogComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
   toInt(key: string) {
     return parseInt(key, 10);
   }

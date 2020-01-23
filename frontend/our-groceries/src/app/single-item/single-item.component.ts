@@ -68,7 +68,7 @@ export class SingleItemComponent implements OnInit {
 
 
   openItemDialog() {
-    const dialogWidth = '300px';
+    const dialogWidth = '315px';
     const dialogRef = this.dialog.open(ItemDialogComponent, {
       width: dialogWidth,
       data: {

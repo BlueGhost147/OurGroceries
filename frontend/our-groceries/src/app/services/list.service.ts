@@ -13,7 +13,7 @@ export class ListService {
 
   role_types = {
     1: 'Read',
-    2: 'Approval_req',
+    2: 'Approval required',
     3: 'Modify',
     4: 'Co-owner'
   };
@@ -60,7 +60,7 @@ export class ListService {
     return this.http.delete('/api/role/' + role.id + '/delete');
   }
 
-  getLiatPermissionLevel(listId) {
+  getListPermissionLevel(listId) {
     return this.http.get('/api/list/' + listId + '/permissions');
   }
 }

@@ -34,8 +34,12 @@ def register(request):
 
 @api_view(['GET'])
 def list_permissions(request, list_id):
-    user = request.user
-    return Response({"permission_level": permission_check_list_by_id(user, list_id)}, status=status.HTTP_200_OK)
+    try:
+        list = List.objects.get(id=list_id)
+        user = request.user
+        return Response({"permission_level": permission_check_list(user, list), "list_type": list.list_type}, status=status.HTTP_200_OK)
+    except List.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 @api_view(['POST'])
@@ -89,7 +93,7 @@ def move_item(request, item_id, list_id):
         permission_level_old_list = permission_check_list(request.user, item.list)
         permission_level_new_list = permission_check_list(request.user, new_list)
 
-        if permission_level_new_list < 2 & permission_level_old_list < 2:
+        if permission_level_new_list < 2 or permission_level_old_list < 2:
             return Response(status=status.HTTP_403_FORBIDDEN)
 
         # If the user only has app_req permission
@@ -100,6 +104,8 @@ def move_item(request, item_id, list_id):
         item.save()
         return Response(status=status.HTTP_202_ACCEPTED)
     except Item.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    except List.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 

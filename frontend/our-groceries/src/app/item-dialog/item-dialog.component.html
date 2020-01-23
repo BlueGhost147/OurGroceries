@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>Edit item</h1>
-<div mat-dialog-content class="dialog-style" [style.height.px]="240">
+<div mat-dialog-content class="dialog-style" [style.height.px]="255">
 
   <mat-form-field [style.width.px]="245">
     <input matInput type="text" placeholder="Name" [(ngModel)]="this.data.itemName">
@@ -38,6 +38,10 @@
 
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-button (click)="saveItem()" [mat-dialog-close]="data.itemId" cdkFocusInitial>Save</button>
+  <button mat-button (click)="onNoClick()">
+    <mat-icon aria-hidden="false" aria-label="cancel">cancel</mat-icon>
+    Cancel</button>
+  <button mat-button color="primary" (click)="saveItem()" [mat-dialog-close]="data.itemId" cdkFocusInitial [disabled]="data.itemName === undefined || data.itemName === '' || data.itemCount < 1">
+    <mat-icon aria-hidden="false" aria-label="save">save</mat-icon>
+    Save</button>
 </div>

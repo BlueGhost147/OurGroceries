@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from "@angular/forms";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -16,7 +16,8 @@ export class ListFormComponent implements OnInit {
   list_id;
 
   constructor(private fb: FormBuilder, private http: HttpClient, private route: ActivatedRoute, public listService: ListService,
-              private router: Router, private snackBar: MatSnackBar) { }
+              private router: Router, private snackBar: MatSnackBar) {
+  }
 
   ngOnInit() {
 
@@ -29,6 +30,14 @@ export class ListFormComponent implements OnInit {
     });
 
     this.list_id = this.route.snapshot.paramMap.get('id');
+
+    this.listService.getListPermissionLevel(this.list_id).subscribe(result => {
+      const permission_level = result["permission_level"];
+      if (permission_level < 4) {
+        this.router.navigate(['/home']);
+      }
+    });
+
     if (this.list_id) {
       this.http.get('/api/list/' + this.list_id + '/get')
         .subscribe((response) => {
@@ -36,11 +45,12 @@ export class ListFormComponent implements OnInit {
         });
     }
 
+
   }
 
   deleteList() {
     const list = this.listFormGroup.value;
-    if(list.id) {
+    if (list.id) {
       this.listService.deleteListById(list.id).subscribe(() => {
         this.router.navigate(['/home']);
         this.snackBar.open('List deleted', null, {

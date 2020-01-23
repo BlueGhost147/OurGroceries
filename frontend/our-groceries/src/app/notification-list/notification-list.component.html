@@ -1,4 +1,5 @@
 <button mat-button [matMenuTriggerFor]="menu" class="logout-comp newList-button" mat-button type="submit" color="primary"
+        *ngIf="expireItems && expireItems.length > 0"
         matBadge="{{expireItems.length}}" matBadgePosition="before" matBadgeColor="accent"><mat-icon>notification_important</mat-icon></button>
 <mat-menu #menu="matMenu">
  <!-- <button mat-menu-item *ngFor="let item of expireItems">{{item.name}} expires on {{item.expires}}</button>-->
