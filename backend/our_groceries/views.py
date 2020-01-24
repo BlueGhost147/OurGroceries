@@ -355,6 +355,7 @@ def role_update(request, role_id):
 def item_expire(request):
     user_id = request.user.id
     today4 = date.today() + +timedelta(days=4)
-    items = Item.objects.filter(list__owner=user_id, expires__isnull=False, expires__lt=today4)
+    # All Items where the user is owner, in a cooled list which will expire in 4 days or less (+expired ones)
+    items = Item.objects.filter(list__owner=user_id, expires__isnull=False, expires__lt=today4, list__list_type=1)
     serializer = ItemSerializer(items, many=True)
     return Response(serializer.data, status=status.HTTP_200_OK)
