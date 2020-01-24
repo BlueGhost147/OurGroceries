@@ -28,6 +28,8 @@ export class SingleItemComponent implements OnInit {
   itemExpires;
   @Input()
   accepted;
+  @Input()
+  listItems;
 
   @Input()
   permission_level;
@@ -82,7 +84,8 @@ export class SingleItemComponent implements OnInit {
         updateevent: this.refreshParent,
         itemExpires: this.itemExpires,
         itemAccepted: this.accepted,
-        permission_level: this.permission_level
+        permission_level: this.permission_level,
+        listItems: this.listItems
       }
     });
 

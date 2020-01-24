@@ -97,6 +97,7 @@ export class ItemListComponent implements OnInit {
         listType: this.listTyp,
         itemId: undefined,
         itemList: this.listId,
+        listItems: this.items
       }
     });
 

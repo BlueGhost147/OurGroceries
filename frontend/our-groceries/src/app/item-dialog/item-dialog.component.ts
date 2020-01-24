@@ -15,6 +15,7 @@ export interface DialogData {
   updateevent;
   itemAccepted;
   permission_level;
+  listItems;
 }
 
 @Component({
@@ -24,10 +25,15 @@ export interface DialogData {
 })
 export class ItemDialogComponent implements OnInit {
 
+  duplicateName;
+  oddExpirationDate;
+
   constructor(
     public dialogRef: MatDialogRef<ItemDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, private itemService: ItemService, public datepipe: DatePipe
   ) {
+    this.onDateChange();
+    this.onNameChange(data.itemName);
   }
 
   onNoClick(): void {
@@ -79,5 +85,18 @@ export class ItemDialogComponent implements OnInit {
 
   toInt(key: string) {
     return parseInt(key, 10);
+  }
+
+  onNameChange(newValue) {
+    this.duplicateName = this.data.listItems.find(item => {
+      return item.name.toLowerCase() === newValue.toLowerCase() && this.data.itemId !== item.id
+    }) !== undefined;
+  }
+
+  onDateChange() {
+    const today = new Date();
+    const itemExp = new Date(this.data.itemExpires);
+    today.setHours(0,0,0,0);
+    this.oddExpirationDate = this.data.itemExpires !== null && this.data.itemExpires !== undefined ? itemExp < today : false;
   }
 }
