@@ -28,6 +28,17 @@ git clone https://github.com/BlueGhost147/OurGroceries.git
 cd OurGroceries
 ````
 
+### Create local enviroment
+````bash
+virtualenv venv
+````
+### Activate the local enviroment
+````bash
+cd venv\Scripts\
+activate.bat
+cd ../..
+````
+
 ## Backend Setup
 
 ### Install dependencies
