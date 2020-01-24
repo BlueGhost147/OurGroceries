@@ -8,7 +8,7 @@
 
 ## Requirments
 * python 3.8.0 with pip installed
-* A Virtual Environment with Django 2.2.6
+* A Virtual Environment for python
 
 ## Description
 Managing the grocery shopping between family members requires a lot of communication. This application helps families to overcome these hurdles, because every member can see what is currently at home and what is on the shopping list – nothing will be bought twice! 
@@ -26,6 +26,17 @@ Clone the git repository and change in the project folder
 ````bash
 git clone https://github.com/BlueGhost147/OurGroceries.git
 cd OurGroceries
+````
+
+### Create local enviroment
+````bash
+virtualenv venv
+````
+### Activate the local enviroment
+````bash
+cd venv\Scripts\
+activate.bat
+cd ../..
 ````
 
 ## Backend Setup
@@ -69,7 +80,7 @@ python manage.py runserver
 ### Install dependencies
 Change in the frontend folder
 ````
-cd frontend
+cd frontend\our-groceries
 ````
 
 Install all required angular dependencies
