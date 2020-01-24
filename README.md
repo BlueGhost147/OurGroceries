@@ -80,7 +80,7 @@ python manage.py runserver
 ### Install dependencies
 Change in the frontend folder
 ````
-cd frontend
+cd frontend\our-groceries
 ````
 
 Install all required angular dependencies
