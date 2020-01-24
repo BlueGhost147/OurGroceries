@@ -31,12 +31,14 @@ export class ListFormComponent implements OnInit {
 
     this.list_id = this.route.snapshot.paramMap.get('id');
 
-    this.listService.getListPermissionLevel(this.list_id).subscribe(result => {
-      const permission_level = result["permission_level"];
-      if (permission_level < 4) {
-        this.router.navigate(['/home']);
-      }
-    });
+    if(this.list_id != null) {
+      this.listService.getListPermissionLevel(this.list_id).subscribe(result => {
+        const permission_level = result["permission_level"];
+        if (permission_level < 4) {
+          this.router.navigate(['/home']);
+        }
+      });
+    }
 
     if (this.list_id) {
       this.http.get('/api/list/' + this.list_id + '/get')

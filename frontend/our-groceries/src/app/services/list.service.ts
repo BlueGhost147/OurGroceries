@@ -61,6 +61,6 @@ export class ListService {
   }
 
   getListPermissionLevel(listId) {
-    return this.http.get('/api/list/' + listId + '/permissions');
+      return this.http.get('/api/list/' + listId + '/permissions');
   }
 }
