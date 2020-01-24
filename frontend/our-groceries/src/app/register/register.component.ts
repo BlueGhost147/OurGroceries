@@ -33,12 +33,15 @@ export class RegisterComponent implements OnInit {
 
   register() {
     if (this.registerFormGroup.valid) {
+      // Remove old access tokens if present
+      localStorage.removeItem('access_token');
+
       this.http.post('/api/register/', this.registerFormGroup.value)
         .subscribe((res: any) => {
           this.snackBar.open('New user registered ', null, {
             duration: 2000,
           });
-          this.ngOnInit();
+          location.reload();
         }, (error) => {
           let msg = 'Registration failed! ';
 

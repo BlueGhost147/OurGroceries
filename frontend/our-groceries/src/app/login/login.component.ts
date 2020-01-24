@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private http: HttpClient, private router: Router,
               private userService: UserService, private snackBar: MatSnackBar) {
+    localStorage.removeItem('access_token');
   }
 
   ngOnInit() {
