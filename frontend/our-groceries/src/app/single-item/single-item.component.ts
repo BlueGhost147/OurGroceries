@@ -94,8 +94,7 @@ export class SingleItemComponent implements OnInit {
     });
   }
 
-  onCheckedChange(event)
-  {
+  onCheckedChange(event) {
     this.itemService.setItemChecked(this.itemId, this.itemChecked).subscribe();
   }
 

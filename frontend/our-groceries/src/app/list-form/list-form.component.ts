@@ -31,7 +31,7 @@ export class ListFormComponent implements OnInit {
 
     this.list_id = this.route.snapshot.paramMap.get('id');
 
-    if(this.list_id != null) {
+    if (this.list_id != null) {
       this.listService.getListPermissionLevel(this.list_id).subscribe(result => {
         const permission_level = result["permission_level"];
         if (permission_level < 4) {

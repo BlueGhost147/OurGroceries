@@ -73,7 +73,7 @@ export class RegisterComponent implements OnInit {
 
   passwordValidator(): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
-      if(this.registerFormGroup === undefined) return null;
+      if (this.registerFormGroup === undefined) return null;
       const pw1 = this.registerFormGroup.controls.password.value;
       const validPW = control.value === pw1;
       return validPW ? null : {'invalidPW': {value: control.value}};

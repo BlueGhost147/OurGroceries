@@ -1,13 +1,14 @@
 <div class="background">
   <div class="logout-row">
     <app-logout class="logout-comp"></app-logout>
-    <button class="logout-comp backToListView-button" mat-button type="submit" color="primary" (click)="backToListView()">
+    <button class="logout-comp backToListView-button" mat-button type="submit" color="primary"
+            (click)="backToListView()">
       <mat-icon aria-hidden="false" aria-label="undo">undo</mat-icon>
       Back
     </button>
 
   </div>
-<div class="home-grid">
+  <div class="home-grid">
     <form [formGroup]="listFormGroup" class="list-form">
       <mat-form-field>
         <input matInput type="text" placeholder="Name" formControlName="name" required>
@@ -50,7 +51,7 @@
       </mat-card-actions>
     </form>
 
-  <app-role-list *ngIf="listFormGroup.controls.id.value" [list_id]="list_id"></app-role-list>
+    <app-role-list *ngIf="listFormGroup.controls.id.value" [list_id]="list_id"></app-role-list>
 
-</div>
+  </div>
 </div>

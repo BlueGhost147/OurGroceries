@@ -52,7 +52,7 @@ export class RoleListComponent implements OnInit {
   openRoleDialog(role) {
     const dialogRef = this.dialog.open(RoleDialogComponent, {
       width: '250px',
-      data: {role: role,userOptions: this.userOptions}
+      data: {role: role, userOptions: this.userOptions}
     });
 
     dialogRef.afterClosed().subscribe(result => {

@@ -49,12 +49,9 @@ export class UserService {
     return permission in permissions;
   }
 
-  getUserOptions()
-  {
+  getUserOptions() {
     return this.http.get('/api/user/list');
   }
-
-
 
 
 }

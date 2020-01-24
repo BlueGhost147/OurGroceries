@@ -9,14 +9,12 @@
     </mat-panel-description>
     <mat-panel-description *ngIf="listType === 2" class="right">
 
-
       <mat-checkbox [(ngModel)]="itemChecked" [disabled]="permission_level < 2"
                     (click)="$event.stopPropagation();"
                     (keydown)="$event.stopPropagation()"
                     (change)="onCheckedChange($event)">
         In Cart
       </mat-checkbox>
-
 
     </mat-panel-description>
     <mat-icon aria-hidden="false" aria-label="Approval required" *ngIf="!accepted">gavel</mat-icon>

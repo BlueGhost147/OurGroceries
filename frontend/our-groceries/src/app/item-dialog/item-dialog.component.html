@@ -2,7 +2,8 @@
 <div mat-dialog-content class="dialog-style" [style.height.px]="255">
 
   <mat-form-field [style.width.px]="245">
-    <input matInput type="text" placeholder="Name" [(ngModel)]="this.data.itemName" (change)="onNameChange($event.target.value)">
+    <input matInput type="text" placeholder="Name" [(ngModel)]="this.data.itemName"
+           (change)="onNameChange($event.target.value)">
     <mat-hint align="end">Name of the item</mat-hint>
   </mat-form-field>
   <mat-form-field [style.width.px]="245">
@@ -15,7 +16,8 @@
     <input matInput type="date" placeholder="Expires" [(ngModel)]="this.data.expires">
     <mat-hint align="end">Expire date</mat-hint>-->
 
-    <input matInput [matDatepicker]="picker" placeholder="Expiration date" [(ngModel)]="this.data.itemExpires" (ngModelChange)="onDateChange()">
+    <input matInput [matDatepicker]="picker" placeholder="Expiration date" [(ngModel)]="this.data.itemExpires"
+           (ngModelChange)="onDateChange()">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
 
@@ -33,22 +35,29 @@
   <div style="width: 245px;" *ngIf="this.data.listType === 2">
     <mat-checkbox [(ngModel)]="this.data.itemChecked">Checked</mat-checkbox>
     <br>
-    <mat-checkbox *ngIf="this.data.itemAccepted === false" [(ngModel)]="this.data.itemAccepted" [disabled]="this.data.permission_level < 3">Accepted</mat-checkbox>
+    <mat-checkbox *ngIf="this.data.itemAccepted === false" [(ngModel)]="this.data.itemAccepted"
+                  [disabled]="this.data.permission_level < 3">Accepted
+    </mat-checkbox>
   </div>
 
   <div *ngIf="duplicateName" class="warning">
-    <mat-icon aria-hidden="false" aria-label="warning">warning</mat-icon><span class="icon-text">This name already exits</span>
+    <mat-icon aria-hidden="false" aria-label="warning">warning</mat-icon>
+    <span class="icon-text">This name already exits</span>
   </div>
   <div *ngIf="oddExpirationDate === true" class="warning">
-    <mat-icon aria-hidden="false" aria-label="warning">warning</mat-icon><span class="icon-text">This item already expired</span>
+    <mat-icon aria-hidden="false" aria-label="warning">warning</mat-icon>
+    <span class="icon-text">This item already expired</span>
   </div>
 
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">
     <mat-icon aria-hidden="false" aria-label="cancel">cancel</mat-icon>
-    Cancel</button>
-  <button mat-button color="primary" (click)="saveItem()" [mat-dialog-close]="data.itemId" cdkFocusInitial [disabled]="data.itemName === undefined || data.itemName === '' || data.itemCount < 1">
+    Cancel
+  </button>
+  <button mat-button color="primary" (click)="saveItem()" [mat-dialog-close]="data.itemId" cdkFocusInitial
+          [disabled]="data.itemName === undefined || data.itemName === '' || data.itemCount < 1">
     <mat-icon aria-hidden="false" aria-label="save">save</mat-icon>
-    Save</button>
+    Save
+  </button>
 </div>

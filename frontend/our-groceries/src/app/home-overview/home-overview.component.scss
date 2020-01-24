@@ -11,47 +11,40 @@ $mediaPhoneWidth: 480px;
   background-position: center;
 }
 
-.logout-comp
-{
+.logout-comp {
   float: right;
   margin: 20px;
 }
 
-.home-grid
-{
+.home-grid {
   width: 100vw;
   display: inline-block;
   //grid-template-columns: auto auto;
 }
 
-.home-grid-col
-{
+.home-grid-col {
   display: inline-block;
   width: 46%;
   padding: 2% 2% 2% 2%;
-  vertical-align:top;
+  vertical-align: top;
   align-content: start;
 }
 
-
-.newList-button
-{
+.newList-button {
   background-color: #FFFFFFCC;
   padding: 5px 15px 5px 15px;
 }
 
 @media (max-width: $mediaPhoneWidth) {
-  .home-grid-col
-  {
+  .home-grid-col {
     display: inline-block;
     width: 94%;
     padding: 3% 3% 3% 3%;
-    vertical-align:top;
+    vertical-align: top;
     align-content: start;
   }
 
-  .mobile-hidden
-  {
+  .mobile-hidden {
     display: none !important;
   }
 }

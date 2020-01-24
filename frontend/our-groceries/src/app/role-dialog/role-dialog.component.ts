@@ -29,7 +29,7 @@ export class RoleDialogComponent implements OnInit {
   saveRole() {
     const newRole = {
       "list": this.data.role.list,
-      "user":  this.data.role.user,
+      "user": this.data.role.user,
       "role_type": this.data.role.role_type.key,
       "id": this.data.role.id
     };
@@ -49,8 +49,7 @@ export class RoleDialogComponent implements OnInit {
     this.filteredUsers = this.allUsers.filter((user) => user.username.toLowerCase().indexOf(val.toLowerCase()) > -1);
   }
 
-  onUserChange(source, value)
-  {
+  onUserChange(source, value) {
 
   }
 

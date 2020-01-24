@@ -31,10 +31,7 @@ schema_view = get_schema_view(
     ),
 )
 
-
 urlpatterns = [
-    # path('item/list', views.item_list),
-    # path('item/options', views.item_options),
     path('item/create', views.item_create),
     path('item/<int:item_id>/get', views.item_update),
     path('item/<int:item_id>/update', views.item_update),
@@ -65,7 +62,6 @@ urlpatterns = [
 
     path('user/getlists/', views.user_getcurrentlist),
     path('user/list', views.user_list),
-
 
     url(r'^swagger(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     url(r'^swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),

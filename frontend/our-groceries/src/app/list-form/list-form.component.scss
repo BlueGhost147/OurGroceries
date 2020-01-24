@@ -17,21 +17,19 @@
   border-radius: 5px;
 }
 
-.home-grid
-{
+.home-grid {
   width: 100vw;
   display: inline-block;
-  vertical-align:top;
+  vertical-align: top;
   align-content: start;
 }
 
-.backToListView-button
-{
+.backToListView-button {
   background-color: #FFFFFFCC;
   padding: 5px 15px 5px 15px;
 }
-.logout-comp
-{
+
+.logout-comp {
   float: right;
   margin: 20px;
 }

@@ -9,6 +9,8 @@
     <mat-error *ngIf="loginFormGroup.controls.password.hasError('required')">Password required</mat-error>
   </mat-form-field>
   <div class="login-action">
-    <button mat-raised-button class="login-button" type="submit" color="primary" [disabled]="!loginFormGroup.valid">Login</button>
+    <button mat-raised-button class="login-button" type="submit" color="primary" [disabled]="!loginFormGroup.valid">
+      Login
+    </button>
   </div>
 </form>

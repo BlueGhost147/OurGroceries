@@ -37,7 +37,8 @@ def list_permissions(request, list_id):
     try:
         list = List.objects.get(id=list_id)
         user = request.user
-        return Response({"permission_level": permission_check_list(user, list), "list_type": list.list_type}, status=status.HTTP_200_OK)
+        return Response({"permission_level": permission_check_list(user, list), "list_type": list.list_type},
+                        status=status.HTTP_200_OK)
     except List.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
@@ -278,8 +279,8 @@ def list_update(request, list_id):
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#@api_view(['GET'])
-#def role_list(request):
+# @api_view(['GET'])
+# def role_list(request):
 #    roles = Role.objects.all()
 #    # role = Role.objects.filter(list__id=list_id)
 #    serializer = RoleSerializer(roles, many=True)
@@ -303,7 +304,6 @@ def role_options(request, list_id):
 
 @api_view(['POST'])
 def role_create(request):
-
     # User is given as user_name
     serializer = RoleSerializer(data=request.data)
 

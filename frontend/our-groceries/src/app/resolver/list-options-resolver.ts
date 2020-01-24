@@ -10,6 +10,7 @@ import {ListService} from "../services/list.service";
 export class ListOptionsResolver implements Resolve<Observable<any>> {
   constructor(private listService: ListService) {
   }
+
   resolve(route: ActivatedRouteSnapshot) {
     return this.listService.getListsByUserId(route.paramMap.get('id'));
   }

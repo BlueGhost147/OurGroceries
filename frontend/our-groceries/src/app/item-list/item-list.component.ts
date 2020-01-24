@@ -63,8 +63,7 @@ export class ItemListComponent implements OnInit {
   updateItems() {
     if (this.listId !== undefined) {
 
-      this.listService.getListPermissionLevel(this.listId).subscribe(result =>
-      {
+      this.listService.getListPermissionLevel(this.listId).subscribe(result => {
         this.permission_level = result["permission_level"];
         this.listTyp = result["list_type"];
       });

@@ -6,7 +6,10 @@
   <mat-form-field class="register-field">
     <input matInput placeholder="Email" formControlName="email" name="email" required>
     <mat-error *ngIf="registerFormGroup.controls.email.hasError('required')">E-mail is required</mat-error>
-    <mat-error *ngIf="registerFormGroup.controls.email.hasError('invalidEmail') && !registerFormGroup.controls.email.hasError('required')">Not a valid e-mail address</mat-error>
+    <mat-error
+      *ngIf="registerFormGroup.controls.email.hasError('invalidEmail') && !registerFormGroup.controls.email.hasError('required')">
+      Not a valid e-mail address
+    </mat-error>
   </mat-form-field>
   <mat-form-field class="register-field">
     <input matInput placeholder="Password" formControlName="password" type="password" name="password"
@@ -17,9 +20,14 @@
     <input matInput placeholder="Repeat password" formControlName="password2" type="password" name="password2"
            required>
     <mat-error *ngIf="registerFormGroup.controls.password2.hasError('required')">Password is required</mat-error>
-    <mat-error *ngIf="registerFormGroup.controls.password2.hasError('invalidPW') && !registerFormGroup.controls.password2.hasError('required')">Passwords must match!</mat-error>
+    <mat-error
+      *ngIf="registerFormGroup.controls.password2.hasError('invalidPW') && !registerFormGroup.controls.password2.hasError('required')">
+      Passwords must match!
+    </mat-error>
   </mat-form-field>
   <div class="register-action">
-    <button mat-raised-button class="register-button" type="submit" color="primary" [disabled]="!registerFormGroup.valid">Register</button>
+    <button mat-raised-button class="register-button" type="submit" color="primary"
+            [disabled]="!registerFormGroup.valid">Register
+    </button>
   </div>
 </form>

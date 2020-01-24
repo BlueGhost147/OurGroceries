@@ -6,9 +6,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ItemService {
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   priorities = {
     1: 'Low',
@@ -16,9 +14,8 @@ export class ItemService {
     3: 'High'
   };
 
-
   getItemsFromList(listId) {
-      return this.http.get('/api/item/list/' + listId + '/get');
+    return this.http.get('/api/item/list/' + listId + '/get');
   }
 
   createItem(item) {
@@ -39,20 +36,21 @@ export class ItemService {
 
   getPriorityFriendlyName(number) {
     switch (number) {
-      case 1: return "Low";
-      case 2: return "Medium";
-      case 3: return "High";
+      case 1:
+        return "Low";
+      case 2:
+        return "Medium";
+      case 3:
+        return "High";
     }
   }
 
-  moveItem(itemId, newListId)
-  {
-    return this.http.put('/api/item/' + itemId + '/move/'+newListId+'/',null);
+  moveItem(itemId, newListId) {
+    return this.http.put('/api/item/' + itemId + '/move/' + newListId + '/', null);
   }
 
-  setItemChecked(itemId, checked)
-  {
-    return this.http.put('/api/item/' +itemId+ '/checked', {'checked': checked});
+  setItemChecked(itemId, checked) {
+    return this.http.put('/api/item/' + itemId + '/checked', {'checked': checked});
   }
 
   getExpire() {

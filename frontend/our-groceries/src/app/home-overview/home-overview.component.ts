@@ -34,9 +34,7 @@ export class HomeOverviewComponent implements OnInit {
 
   }
 
-
   onListSwipe(event) {
-    // alert("swipe");
   }
 
   newList() {

@@ -96,7 +96,7 @@ export class ItemDialogComponent implements OnInit {
   onDateChange() {
     const today = new Date();
     const itemExp = new Date(this.data.itemExpires);
-    today.setHours(0,0,0,0);
+    today.setHours(0, 0, 0, 0);
     this.oddExpirationDate = this.data.itemExpires !== null && this.data.itemExpires !== undefined ? itemExp < today : false;
   }
 }

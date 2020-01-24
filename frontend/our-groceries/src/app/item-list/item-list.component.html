@@ -1,46 +1,47 @@
-<mat-card class="item-list-card" > <!----[ngClass]="listTyp === 1 ? 'cool-list' : 'shop-list'"-->
-  <mat-icon *ngIf="listTyp === 2" aria-hidden="false" aria-label="Shopping list" class="list-icon list-icon-shop">shopping_cart</mat-icon>
-  <mat-icon *ngIf="listTyp === 1" aria-hidden="false" aria-label="Fridge" class="list-icon list-icon-cool">ac_unit</mat-icon>
+<mat-card class="item-list-card"> <!----[ngClass]="listTyp === 1 ? 'cool-list' : 'shop-list'"-->
+  <mat-icon *ngIf="listTyp === 2" aria-hidden="false" aria-label="Shopping list" class="list-icon list-icon-shop">
+    shopping_cart
+  </mat-icon>
+  <mat-icon *ngIf="listTyp === 1" aria-hidden="false" aria-label="Fridge" class="list-icon list-icon-cool">ac_unit
+  </mat-icon>
   <!-- List select -->
   <mat-form-field class="list-select">
     <mat-label class="list-select">Select a list</mat-label>
     <mat-select [(value)]="listId" (selectionChange)="updateListSelection($event)" class="list-select">
-      <mat-option *ngFor="let list of listOptions" [value]="list.id" class="list-select-option" [ngClass]="list.list_type === 1 ? 'cool-list-ico' : 'shop-list-ico'">
-          {{list.name}}
+      <mat-option *ngFor="let list of listOptions" [value]="list.id" class="list-select-option"
+                  [ngClass]="list.list_type === 1 ? 'cool-list-ico' : 'shop-list-ico'">
+        {{list.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-
-  <!-- Item List --><!--
-  <div *ngFor="let item of items" class="item-list">
-    <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id" [itemPriority]="item.priority"
-                     [isLeft]="false" [listId]="this.listId"></app-single-item>
-  </div>-->
 
   <div class="item-list overflow-buffer">
     <div cdkDropList cdkDropListSortingDisabled #ditemList="cdkDropList" [id]="listId"
          class="" (cdkDropListDropped)="dropItem($event)">
       <div class="" *ngFor="let item of items" cdkDrag [cdkDragDisabled]="permission_level < 2" [id]="item.id">
-        <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id" [itemPriority]="item.priority" [listType]="item.listType" [itemExpires]="item.expires" [itemChecked]="item.checked"
-                         [listId]="this.listId" [permission_level]="permission_level" [accepted]="item.accepted" [listItems]="items" (refreshParent)="updatedList($event)"></app-single-item>
+        <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id"
+                         [itemPriority]="item.priority" [listType]="item.listType" [itemExpires]="item.expires"
+                         [itemChecked]="item.checked"
+                         [listId]="this.listId" [permission_level]="permission_level" [accepted]="item.accepted"
+                         [listItems]="items" (refreshParent)="updatedList($event)"></app-single-item>
       </div>
       <div class="buffer-div"></div>
     </div>
   </div>
 
   <div *ngIf="listId!==undefined">
-    <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="editList()" [disabled]="permission_level < 4">
+    <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="editList()"
+            [disabled]="permission_level < 4">
       <mat-icon aria-hidden="false" aria-label="settings_applications">settings_applications</mat-icon>
       Edit list
     </button>
 
-    <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="newItem()" [disabled]="permission_level < 2">
+    <button class="logout-comp newList-button" mat-button type="submit" color="primary" (click)="newItem()"
+            [disabled]="permission_level < 2">
       <mat-icon aria-hidden="false" aria-label="add">add</mat-icon>
       New item
     </button>
   </div>
-
-
 
 
 </mat-card>

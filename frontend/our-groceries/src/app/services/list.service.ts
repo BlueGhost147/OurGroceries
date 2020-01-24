@@ -42,7 +42,6 @@ export class ListService {
     return this.http.get('/api/list/' + listId + '/set/' + position + '/');
   }
 
-
   getRole(id) {
     return this.http.get('/api/role/options/' + id);
   }
@@ -61,6 +60,6 @@ export class ListService {
   }
 
   getListPermissionLevel(listId) {
-      return this.http.get('/api/list/' + listId + '/permissions');
+    return this.http.get('/api/list/' + listId + '/permissions');
   }
 }

@@ -2,7 +2,6 @@ $mediaScreenWidth: 1260px;
 $mediaTabletWidth: 960px;
 $mediaPhoneWidth: 480px;
 
-
 .lock-card {
   position: absolute;
   top: 40%;
@@ -18,8 +17,7 @@ $mediaPhoneWidth: 480px;
   background-position: center;
 }
 
-.mat-card
-{
+.mat-card {
   background: #ffffffEE;
 }
 
@@ -30,6 +28,7 @@ $mediaPhoneWidth: 480px;
     margin: 20px 0 0 2%;
   }
 }
+
 @media (max-width: $mediaTabletWidth) {
 
   .lock-card {
@@ -37,6 +36,7 @@ $mediaPhoneWidth: 480px;
     margin: 20px 10% 0 10%;
   }
 }
+
 @media (min-width: $mediaTabletWidth) {
 
   .lock-card {

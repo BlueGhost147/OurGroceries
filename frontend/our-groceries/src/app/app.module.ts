@@ -1,16 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import {AppRoutingModule} from './app-routing.module';
+import {AppComponent} from './app.component';
 import {DateComponent} from './date/date.component';
 import {LoginComponent} from './login/login.component';
 import {LogoutComponent} from './logout/logout.component';
-import { RegisterComponent } from './register/register.component';
-import { ItemListComponent } from './item-list/item-list.component';
-import { SingleItemComponent } from './single-item/single-item.component';
-import { HomeOverviewComponent } from './home-overview/home-overview.component';
-import { ListFormComponent } from './list-form/list-form.component';
+import {RegisterComponent} from './register/register.component';
+import {ItemListComponent} from './item-list/item-list.component';
+import {SingleItemComponent} from './single-item/single-item.component';
+import {HomeOverviewComponent} from './home-overview/home-overview.component';
+import {ListFormComponent} from './list-form/list-form.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -29,17 +29,17 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatSnackBar, MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
-import { LockScreenComponent } from './lock-screen/lock-screen.component';
+import {LockScreenComponent} from './lock-screen/lock-screen.component';
 import {MatIconModule, MatTabsModule} from '@angular/material';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { ItemDialogComponent } from './item-dialog/item-dialog.component';
+import {ItemDialogComponent} from './item-dialog/item-dialog.component';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {DatePipe} from '@angular/common';
 import {HttperrorInterceptor} from './httperror.interceptor';
-import { RoleDialogComponent } from './role-dialog/role-dialog.component';
-import { RoleListComponent } from './role-list/role-list.component';
+import {RoleDialogComponent} from './role-dialog/role-dialog.component';
+import {RoleListComponent} from './role-list/role-list.component';
 import {MatBadgeModule} from "@angular/material/badge";
-import { NotificationListComponent } from './notification-list/notification-list.component';
+import {NotificationListComponent} from './notification-list/notification-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -108,4 +108,5 @@ export function tokenGetter() {
   bootstrap: [AppComponent],
   entryComponents: [SingleItemComponent, ItemListComponent, ItemDialogComponent, RoleDialogComponent],
 })
-export class AppModule { }
+export class AppModule {
+}
