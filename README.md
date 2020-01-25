@@ -65,7 +65,7 @@ python manage.py loaddata ./fixtures/testdata.json
 ````
 
 Create a superuser (optional)
-Note: Users which are created with the createsuperuser-command or in the django backend cann´t log in in the frontend, since they don´t have a UserProfile. To fix this a UserProfile has to be create manually for the user.
+Note: Users which are created with the createsuperuser-command or in the django backend can´t log in in the frontend, since they don´t have a UserProfile. To fix this a UserProfile has to be create manually for the user.
 ````bash
 python manage.py createsuperuser
 ````
