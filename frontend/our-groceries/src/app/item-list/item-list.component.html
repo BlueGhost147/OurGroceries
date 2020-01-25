@@ -16,7 +16,7 @@
   </mat-form-field>
 
   <div class="item-list overflow-buffer">
-    <div cdkDropList cdkDropListSortingDisabled #ditemList="cdkDropList" [id]="listId"
+    <div cdkDropList cdkDropListSortingDisabled #ditemList="cdkDropList" [id]="listId" *ngIf="listId"
          class="" (cdkDropListDropped)="dropItem($event)">
       <div class="" *ngFor="let item of items" cdkDrag [cdkDragDisabled]="permission_level < 2" [id]="item.id">
         <app-single-item [itemName]="item.name" [itemCount]="item.amount" [itemId]="item.id"
