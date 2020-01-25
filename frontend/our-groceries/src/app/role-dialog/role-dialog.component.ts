@@ -53,4 +53,7 @@ export class RoleDialogComponent implements OnInit {
 
   }
 
+  toInt(key: string) {
+    return parseInt(key, 10);
+  }
 }

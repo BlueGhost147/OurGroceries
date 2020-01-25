@@ -15,7 +15,7 @@
 
   <mat-form-field>
     <mat-select placeholder="Role Type" [(ngModel)]="this.data.role.role_type">
-      <mat-option [value]="roleOption" *ngFor="let roleOption of listService.role_types | keyvalue">
+      <mat-option *ngFor="let roleOption of listService.role_types | keyvalue" [value]="toInt(roleOption.key)">
         {{roleOption.value}}
       </mat-option>
     </mat-select>
