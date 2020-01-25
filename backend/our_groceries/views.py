@@ -226,7 +226,7 @@ def list_list(request):
         lists = List.objects.all()
     else:
         # If a role exits, it needs to be at least read permission
-        lists = List.objects.filter(Q(owner=request.user.id) | Q(roles__user=request.user.id))
+        lists = List.objects.filter(Q(owner=request.user.id) | Q(roles__user=request.user.id)).distinct()
     serializer = ListSerializer(lists, many=True)
     return Response(serializer.data)
 
