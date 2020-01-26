@@ -107,8 +107,10 @@ ng serve
 ## Troubleshooting
 
 ### If the frontend shows a Forbidden error:
+
 * open: localhost:4200/logout
-This can happen if an old auth token exits. The Llgout will clear the token.
+
+This can happen if an old auth token exits. The logout will clear the token.
 
 
 ### If django throws the error 'No such table' 
