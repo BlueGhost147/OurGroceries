@@ -106,7 +106,12 @@ ng serve
 
 ## Troubleshooting
 
-If django throws the error 'No such table' 
+### If the frontend shows a Forbidden error:
+* open: localhost:4200/logout
+This can happen if an old auth token exits. The Llgout will clear the token.
+
+
+### If django throws the error 'No such table' 
 
 ````bash
 python manage.py migrate --run-syncdb
